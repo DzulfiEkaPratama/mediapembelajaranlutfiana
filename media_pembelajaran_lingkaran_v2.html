@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+<title>Media Pembelajaran Lingkaran — Taman Kota</title>
+<style>
+:root {
+  --green:#1a6b3c; --green-l:#2d9b5a; --green-p:#e8f5ee;
+  --blue:#1a4a7a;  --blue-l:#2e6db4;  --blue-p:#e8f0f8;
+  --purple:#5a2d82;--purple-l:#8e44ad;--purple-p:#f3e8ff;
+  --orange:#c0390b;--orange-l:#e67e22;--orange-p:#fef3e8;
+  --teal:#0e7c6b;  --red:#c0392b;     --gold:#d4a017;
+  --dark:#1a1a2e;  --mid:#4a4a6a;     --light:#f8f9fc;
+  --white:#ffffff; --gray:#f0f4f8;
+  --shadow:0 8px 32px rgba(26,26,46,.12);
+  --radius:16px;   --rsm:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Varela Round',sans-serif !important;}
+body{font-family:'Varela Round',sans-serif;background:var(--gray);color:var(--dark);min-height:100vh;overflow-x:hidden;}
+
+/* HEADER */
+.app-header{background:linear-gradient(135deg,#ec4899 0%,#aaebff 50%,#ec4899 100%);background-size:220% 220%;animation:headerDrift 14s ease-in-out infinite;padding:18px 20px 14px;text-align:center;position:relative;overflow:hidden;}
+.app-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,#aaebff 0%,transparent 0%),radial-gradient(ellipse at 70% 50%,rgba(46,109,180,.25) 0%,transparent 0%);}
+.app-header h1{font-family:'Varela Round',sans-serif;font-size:clamp(16px,4vw,26px);font-weight:900;color:#ec4899;position:relative;text-shadow:0 2px 8px rgba(0,0,0,.3);}
+.app-header h1::first-letter{display:inline-block;animation:iconFloat 3s ease-in-out infinite;}
+.app-header p{font-size:12px;color:#ec4899;margin-top:4px;position:relative;}
+
+/* NAV */
+.nav-tabs{display:flex;background:#fff;border-bottom:3px solid #e8ecf0;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.08);}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{flex:1;min-width:90px;padding:12px 10px 10px;border:none;background:none;cursor:pointer;font-family:'Varela Round',sans-serif;font-size:11px;font-weight:700;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-3px;transition:all .38s cubic-bezier(.2,1.5,.4,1);white-space:nowrap;display:flex;flex-direction:column;align-items:center;gap:3px;}
+.nav-tab .ti{font-size:18px;}
+.nav-tab:hover{color:var(--blue);background:var(--blue-p);}
+.nav-tab.m1.active{color:#be185d;border-bottom-color:#ec4899;background:#fff0f6;}
+.nav-tab.m2.active{color:var(--blue);border-bottom-color:var(--blue);background:var(--blue-p);}
+.nav-tab.m3.active{color:var(--purple);border-bottom-color:var(--purple);background:var(--purple-p);}
+
+/* MAIN */
+.main{padding:14px;max-width:900px;margin:0 auto;}
+.module{display:none;}
+.module.active{display:block;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.module.exiting{animation:moduleFadeOut .22s ease forwards!important;}
+.module.entering{animation:moduleFadeIn .3s ease both!important;}
+@keyframes moduleFadeOut{from{opacity:1}to{opacity:0}}
+@keyframes moduleFadeIn{from{opacity:0}to{opacity:1}}
+.module.active>.fase-bar,.module.active>.card{animation:staggerUp .52s cubic-bezier(.2,1.2,.35,1) both;}
+.module.active>.fase-bar{animation-delay:40ms}.module.active>.card:nth-of-type(2){animation-delay:100ms}.module.active>.card:nth-of-type(3){animation-delay:160ms}.module.active>.card:nth-of-type(4){animation-delay:220ms}
+@keyframes staggerUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes headerDrift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes infoSwap{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes activePulse{0%,100%{box-shadow:0 0 0 0 rgba(219,39,119,.15)}50%{box-shadow:0 0 0 5px rgba(219,39,119,.18)}}
+
+/* CARD */
+.card{background:#fff;border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);}
+.pi-proof-card{background:#eff6ff;border:1px solid #bfdbfe;}
+.card-header{font-family:'Varela Round',sans-serif;font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+
+/* FASE PBL BADGE */
+.fase-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;padding:10px 12px;background:#f8f9fc;border-radius:var(--rsm);border:1px solid #e8ecf0;}
+.fase-pill{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:.3px;transition:transform .35s cubic-bezier(.2,1.5,.4,1),filter .25s;}
+.fase-pill:hover{transform:translateY(-2px) scale(1.04);filter:saturate(1.15)}
+.fp-steam{background:#e8f5ee;color:var(--green);}
+.fp-pbl{background:#e8f0f8;color:var(--blue);}
+.fp-dl{background:var(--purple-p);color:var(--purple);}
+.fp-bk{background:#fef0ee;color:var(--orange);}
+.fp-fase{background:var(--dark);color:#fff;}
+#module1 > .fase-bar{background:#fff0f6;border-color:#fbcfe8;}
+#module1 > .fase-bar .fase-pill{background:#fce7f3;color:#9d174d;}
+#module1 > .fase-bar .fp-fase{background:#db2777;color:#fff;}
+#module2 > .fase-bar{background:#effcff;border-color:#9beaff;}
+#module2 > .fase-bar .fase-pill{background:#a3edff;color:#073b4c;}
+#module2 > .fase-bar .fp-fase{background:#087f9c;color:#fff;}
+.kd-calculator-card .fase-bar{background:#fff0f6;border-color:#fbcfe8;}
+.kd-calculator-card .fase-pill{background:#fce7f3;color:#be185d;}
+.park-calculator-card .fase-bar{background:#effcff;border-color:#9beaff;}
+.park-calculator-card .fase-pill{background:#d9f7ff;color:#075b73;}
+
+/* INPUT */
+.input-group{margin-bottom:12px;}
+.input-group label{display:block;font-size:12px;font-weight:700;color:#000000;margin-bottom:5px;}
+.input-group input,.input-group select{width:100%;padding:11px 13px;border:2px solid #e0e8f0;border-radius:var(--rsm);font-family:'Varela Round',sans-serif;font-size:14px;font-weight:600;color:var(--dark);transition:border-color .2s;background:#fff;border: 1px solid #fbcfe8;}
+.input-group input:focus,.input-group select:focus{outline:none;border-color:var(--blue-l);}
+.unit-note{font-size:11px;color:var(--mid);margin-top:3px;font-style:italic;}
+/* P3: jari-jari taman memakai aksen ungu, terpisah dari style input umum */
+#module3 #z-r{border:1px solid #D8B4FE;}
+#module3 #z-r:focus{border-color:#C084FC;box-shadow:0 0 0 3px rgba(192,132,252,.2);}
+
+/* CUSTOM UNIT DROPDOWN */
+.unit-dropdown{position:relative;width:100%;}
+.unit-dropdown-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;border:1px solid #dbe3ee;border-radius:12px;background:#fff;color:#1e293b;font:600 14px 'Varela Round',sans-serif;text-align:left;cursor:pointer;transition:border-color .2s,box-shadow .2s;}
+.unit-dropdown-trigger:hover,.unit-dropdown.open .unit-dropdown-trigger{border-color:#bfdbfe;box-shadow:0 0 0 3px rgba(191,219,254,.25);}
+.unit-dropdown-trigger:focus-visible,.unit-option:focus-visible{outline:2px solid #93c5fd;outline-offset:2px;}
+.unit-dropdown-chevron{color:#64748b;font-size:12px;transition:transform .2s;}
+.unit-dropdown.open .unit-dropdown-chevron{transform:rotate(180deg);}
+.unit-dropdown-menu{position:absolute;top:calc(100% + 7px);left:0;right:0;z-index:30;padding:5px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 10px 24px rgba(15,23,42,.14);opacity:0;visibility:hidden;transform:translateY(-5px) scale(.98);transform-origin:top center;transition:opacity .18s ease,transform .18s ease,visibility .18s;}
+.unit-dropdown.open .unit-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+.unit-option{width:100%;display:flex;align-items:center;gap:10px;padding:10px;border:0;border-radius:8px;background:transparent;color:#1e293b;text-align:left;cursor:pointer;font-family:'Varela Round',sans-serif;transition:background .15s,color .15s;}
+.unit-option:hover,.unit-option[aria-selected="true"]{background:#eff6ff;color:#1e40af;}
+.unit-option-copy{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0;}
+.unit-option-title{font-size:13px;font-weight:700;}
+.unit-option-description{font-size:11px;font-weight:400;color:#64748b;}
+.unit-option-check{width:16px;text-align:center;color:#1e40af;font-size:14px;font-weight:800;opacity:0;}
+.unit-option[aria-selected="true"] .unit-option-check{opacity:1;}
+/* P1 pink unit dropdown */
+#unit-dropdown-1 .unit-dropdown-trigger{border-color:#fbcfe8;color:#9d174d;}
+#unit-dropdown-1 .unit-dropdown-trigger:hover,#unit-dropdown-1.open .unit-dropdown-trigger{border-color:#ec4899;box-shadow:0 0 0 3px rgba(236,72,153,.2);}
+#unit-dropdown-1 .unit-dropdown-trigger:focus-visible,#unit-dropdown-1 .unit-option:focus-visible{outline-color:#ec4899;}
+#unit-dropdown-1 .unit-dropdown-chevron{color:#be185d;}
+#unit-dropdown-1 .unit-dropdown-menu{border-color:#fbcfe8;box-shadow:0 10px 24px rgba(190,24,93,.14);}
+#unit-dropdown-1 .unit-option{color:#9d174d;}
+#unit-dropdown-1 .unit-option:hover,#unit-dropdown-1 .unit-option[aria-selected="true"]{background:#fff0f6;color:#9d174d;}
+#unit-dropdown-1 .unit-option-check{color:#db2777;}
+#unit-dropdown-current{display:flex;flex-direction:column;gap:3px;}
+#satuan-badge-1{background:#db2777;color:#fff;}
+.park-unit-selector{padding:12px;border:1px solid #BAE6FD;border-radius:16px;}
+.park-unit-selector .unit-dropdown-trigger{padding:14px 16px;border:1px solid #BAE6FD;border-radius:16px;background: #effcff;}
+.park-unit-selector .unit-dropdown-trigger:hover,.park-unit-selector.unit-dropdown.open .unit-dropdown-trigger{border-color:#7DD3FC;box-shadow:0 0 0 3px rgba(125,211,252,.2);}
+.park-unit-selector .unit-dropdown-menu{top:calc(100% + 8px);padding:7px;background:#FFFFFF;border:1px solid #BAE6FD;border-radius:16px;box-shadow:0 12px 28px rgba(15,23,42,.14);}
+.park-unit-selector .unit-option{gap:12px;padding:14px 16px;border-radius:12px;color:#0F172A;}
+.park-unit-selector .unit-option:hover,.park-unit-selector .unit-option[aria-selected="true"]{background:#E0F2FE;color:#0F172A;}
+.park-unit-selector .unit-option-description{color:#475569;}
+.park-unit-selector .unit-option-check{color:#0F172A;}
+.park-unit-selector .satuan-badge{background:#5B9EB0;color:#fff;border-radius:999px;padding:3px 10px;}
+/* P2 park calculator inputs: blue borders scoped to this section */
+.park-calculator-card .input-group input,.park-calculator-card .input-group select{border:1px solid #BAE6FD;}
+.park-calculator-card .input-group input:focus,.park-calculator-card .input-group select:focus{border-color:#38BDF8;box-shadow:0 0 0 3px rgba(56,189,248,.18);}
+/* P3 lavender unit dropdown */
+#unit-dropdown-3 .unit-dropdown-trigger{border:1px solid #D8B4FE;border-radius:12px;color:#581C87;}
+#unit-dropdown-3 .unit-dropdown-trigger:hover,#unit-dropdown-3.open .unit-dropdown-trigger{border-color:#C084FC;box-shadow:0 0 0 3px rgba(216,180,254,.35);}
+#unit-dropdown-3 .unit-dropdown-chevron{color:#6B21A8;}
+#unit-dropdown-3 .unit-dropdown-menu{top:calc(100% + 6px);padding:6px;border-color:#D8B4FE;border-radius:12px;box-shadow:0 10px 25px -5px rgba(107,33,168,.1);}
+#unit-dropdown-3 .unit-option{border-radius:8px;color:#581C87;}
+#unit-dropdown-3 .unit-option:hover,#unit-dropdown-3 .unit-option[aria-selected="true"]{background:#F3E8FF;color:#581C87;}
+#unit-dropdown-3 .unit-option-check{color:#6B21A8;}
+#satuan-badge-3{background:#6B21A8;color:#fff;}
+.pi-dropdown{position:relative;width:100%;}
+.pi-value-native{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.pi-dropdown-trigger{width:100%;min-height:50px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border:1px solid #D8B4FE;border-radius:14px;background:#fff;color:#581C87;font:600 14px 'Varela Round',sans-serif;text-align:left;cursor:pointer;transition:border-color .2s,box-shadow .2s,background .2s;}
+.pi-dropdown-trigger:hover,.pi-dropdown.open .pi-dropdown-trigger,.pi-dropdown-trigger:focus-visible{border-color:#C084FC;background:#FCF8FF;box-shadow:0 0 0 3px rgba(216,180,254,.3);outline:none;}
+.pi-dropdown-chevron{color:#6B21A8;font-size:13px;transition:transform .22s ease;}
+.pi-dropdown.open .pi-dropdown-chevron{transform:rotate(180deg);}
+.pi-dropdown-menu{position:absolute;top:calc(100% + 8px);left:0;right:0;z-index:40;padding:7px;background:#fff;border:1px solid #D8B4FE;border-radius:16px;box-shadow:0 14px 32px rgba(88,28,135,.16);opacity:0;visibility:hidden;transform:translateY(-7px) scale(.98);transform-origin:top center;transition:opacity .2s ease,transform .2s ease,visibility .2s;}
+.pi-dropdown.open .pi-dropdown-menu{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+.pi-dropdown-option{width:100%;display:flex;align-items:center;gap:10px;padding:12px;border:1px solid transparent;border-radius:11px;background:transparent;color:#581C87;text-align:left;cursor:pointer;font:600 13px 'Varela Round',sans-serif;transition:background .16s ease,border-color .16s ease,transform .16s ease;}
+.pi-dropdown-option:hover,.pi-dropdown-option[aria-selected="true"]{background:#F3E8FF;border-color:#E9D5FF;color:#581C87;}
+.pi-dropdown-option:hover{transform:translateX(2px);}
+.pi-dropdown-option-copy{flex:1;}
+.pi-dropdown-option-check{width:18px;text-align:center;color:#6B21A8;font-size:15px;font-weight:800;opacity:0;transform:scale(.7);transition:opacity .16s ease,transform .16s ease;}
+.pi-dropdown-option[aria-selected="true"] .pi-dropdown-option-check{opacity:1;transform:scale(1);}
+@media(prefers-reduced-motion:reduce){.pi-dropdown-menu,.pi-dropdown-chevron,.pi-dropdown-option,.pi-dropdown-option-check,.pi-dropdown-trigger{transition:none;}}
+@media(prefers-reduced-motion:reduce){.unit-dropdown-menu,.unit-dropdown-chevron,.unit-dropdown-trigger,.unit-option{transition:none;}}
+
+/* SATUAN BADGE */
+.satuan-badge{display:inline-block;background:var(--dark);color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;background: #db2777;}
+.park-calculator-card .satuan-badge{background:#087f9c;color:#fff;}
+
+/* BTN */
+.btn-primary{width:100%;padding:13px;border:none;border-radius:var(--rsm);font-family:'Varela Round',sans-serif;font-size:14px;font-weight:800;cursor:pointer;transition:all .38s cubic-bezier(.2,1.5,.4,1);letter-spacing:.4px;}
+.btn-green{background:linear-gradient(135deg,var(--green),var(--green-l));color:#fff;box-shadow:0 4px 16px rgba(26,107,60,.3);}
+.btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue-l));color:#fff;box-shadow:0 4px 16px rgba(46,109,180,.3);}
+.park-calculator-card .btn-blue{background:linear-gradient(135deg,#087f9c,#44daff);color:#073b4c;box-shadow:0 4px 16px rgba(68,218,255,.3);}
+.btn-primary:hover{transform:translateY(-2px);filter:brightness(1.08);}
+
+/* RESULT GRID */
+.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px;}
+.ri{background:var(--blue-p);border-radius:var(--rsm);padding:11px;border:1px solid #c5d8f0;}
+.ri .rl{font-size:10px;font-weight:700;color:var(--blue-l);margin-bottom:3px;}
+.ri .rv{font-size:17px;font-weight:900;color:var(--blue);}
+.ri .ru{font-size:11px;color:var(--mid);}
+.park-calculator-card .ri{background:#effcff;border-color:#9beaff;}
+.park-calculator-card .ri .rl,.park-calculator-card .ri .rv{color:#075b73;}
+.ri.hl{background:var(--blue);border-color:var(--blue);grid-column:span 2;}
+.park-calculator-card .ri.hl{background:#087f9c;border-color:#087f9c;}
+.ri.hl .rl{color:rgba(255,255,255,.8);}
+.ri.hl .rv{color:#fff;font-size:19px;}
+.ri.hl .ru{color:rgba(255,255,255,.7);}
+
+/* STATUS */
+.status-bar{margin-top:10px;padding:11px 14px;border-radius:var(--rsm);font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.sb-ok{background:var(--green-p);color:var(--green);border:1px solid #a8d8b8;}
+.sb-warn{background:var(--orange-p);color:var(--orange);border:1px solid #f0c8a0;}
+.sb-over{background:#fff0f0;color:var(--red);border:1px solid #f0b0b0;}
+
+/* CANVAS */
+canvas{width:100%;border-radius:var(--rsm);display:block;}
+
+/* INFO BOX */
+.info-box{background:#fff0f6;border-left:4px solid #ec4899;border-radius:var(--rsm);padding:13px 15px;margin-top:10px;}
+.info-box h3{font-size:14px;font-weight:800;color:#be185d;margin-bottom:5px;}
+.info-box p{font-size:12px;color:var(--mid);line-height:1.6;}
+.info-box .contoh{font-style:italic;color:#9d174d;margin-top:5px;font-size:11px;}
+.info-box .rumus-tag{display:inline-block;background:#db2777;color:#fff;padding:3px 10px;border-radius:8px;font-size:12px;font-weight:700;margin-top:6px;}
+
+/* UNSUR GRID */
+.unsur-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.unsur-btn{padding:9px 7px;border:2px solid #f9a8d4;border-radius:var(--rsm);background:#fff;cursor:pointer;font-family:'Varela Round',sans-serif;font-size:11px;font-weight:700;color:var(--mid);transition:all .38s cubic-bezier(.2,1.5,.4,1);text-align:center;}
+.unsur-btn:hover{border-color:#ec4899;color:#be185d;background:#fff0f6;}
+.unsur-btn.active{border-color:#db2777;color:#fff;background:#db2777;animation:activePulse 1.8s ease-in-out infinite;}
+#infoBox1.info-swap{animation:infoSwap .28s ease both;}
+.ri.ri-pop{animation:staggerUp .42s cubic-bezier(.2,1.2,.35,1) both;}
+@keyframes angleShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+@keyframes angleGlow{0%,100%{box-shadow:0 0 0 0 rgba(126,34,206,.08)}50%{box-shadow:0 0 16px 3px rgba(34,197,94,.42),0 0 24px rgba(126,34,206,.24)}}
+#angleWarn.show{animation:angleShake .32s ease both;}
+#angleOk.angle-pulse{animation:angleGlow 1.15s ease-in-out infinite;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}}
+
+/* ZONA */
+.zona-item{background:#fff;border:2px solid #e8e0f0;border-radius:var(--rsm);padding:13px;margin-bottom:10px;transition:border-color .2s;}
+.zona-item.sel{border-color:var(--purple);}
+.zona-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.zona-name{font-size:13px;font-weight:800;display:flex;align-items:center;gap:7px;}
+.zdot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.zangle{font-size:18px;font-weight:900;color:var(--purple);}
+.slider-wrap{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.slider-wrap input[type=range]{flex:1;height:5px;-webkit-appearance:auto;border-radius:3px;cursor:pointer;}
+.slider-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:auto;width:18px;height:18px;border-radius:50%;cursor:pointer;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.2);}
+.zona-results{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.zri{text-align:center;padding:7px;background:var(--purple-p);border-radius:7px;}
+.zri .zrl{font-size:9px;font-weight:700;color:var(--purple-l);}
+.zri .zrv{font-size:12px;font-weight:900;color:var(--purple);}
+
+/* ANGGARAN TABLE */
+.atbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+.atbl th{background:var(--purple);color:#fff;padding:8px 10px;text-align:left;font-size:11px;}
+.atbl td{padding:8px 10px;border-bottom:1px solid #eee;}
+.atbl tr:nth-child(even) td{background:var(--purple-p);}
+.atbl .trow td{font-weight:900;background:var(--purple-p);color:var(--purple);font-size:13px;}
+
+/* RUMUS BOX */
+.rumus-box{background:linear-gradient(135deg,#e8f0fb,#f0e8fb);border-radius:var(--rsm);padding:13px 15px;margin-top:10px;border:1px solid #c8d8f0;}
+.rumus-box p{font-size:12px;color:var(--mid);margin-bottom:3px;}
+.rumus-box .rf{font-size:15px;font-weight:800;color:var(--blue);font-style:italic;}
+
+/* π EXPLORER */
+.pi-explorer{background:linear-gradient(135deg,#e8f0fb,#e8f5ee);border-radius:var(--rsm);padding:14px;margin-bottom:12px;border:1px solid #c8d8f0;}
+.pi-explorer h4{font-size:13px;font-weight:800;color:var(--blue);margin-bottom:8px;}
+.pi-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:10px;}
+.pi-table th{background:var(--blue);color:#fff;padding:6px 8px;text-align:center;font-size:11px;}
+.pi-table td{padding:6px 8px;border-bottom:1px solid #dde;text-align:center;}
+.pi-table tr:nth-child(even) td{background:#f0f4fb;}
+.pi-table .highlight-row td{background:var(--blue-p);font-weight:800;color:var(--blue);}
+.pi-result{text-align:center;font-size:18px;font-weight:900;color:var(--blue);padding:10px;background:var(--blue-p);border-radius:8px;margin-top:8px;}
+.pi-proof-card .pi-explorer{background:linear-gradient(135deg,#e8fbff,#d9f7ff);border-color:#9beaff;}
+.pi-proof-card .pi-explorer h4{color:#087f9c;}
+.pi-proof-card .pi-table th{background:#44daff;color:#073b4c;}
+.pi-proof-card .pi-table tr:nth-child(even) td{background:#f0fcff;}
+.pi-proof-card .pi-table .highlight-row td{background:#c9f5ff;color:#075b73;}
+.pi-proof-card .pi-result{color:#075b73;background:#d9f7ff;}
+.pi-proof-card .rumus-box{background:linear-gradient(135deg,#e8fbff,#d9f7ff);border-color:#9beaff;}
+.pi-proof-card .rumus-box .rf{color:#087f9c;}
+
+/* KD CALC */
+.kd-calc{background:var(--green-p);border-radius:var(--rsm);padding:13px;border:1px solid #a8d8b8;margin-top:10px;}
+.kd-calc h4{font-size:13px;font-weight:800;color:var(--green);margin-bottom:10px;}
+.kd-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+.kd-result{background:var(--green);color:#fff;border-radius:8px;padding:10px;text-align:center;margin-top:6px;}
+.kd-calculator-card .kd-result{background:#db2777;}
+.kd-result .kdr-label{font-size:11px;opacity:.85;}
+.kd-result .kdr-val{font-size:22px;font-weight:900;}
+
+/* ANGLE WARNING */
+.angle-warn{background:#fff3e0;color:#e65100;border:1px solid #ffcc80;border-radius:8px;padding:9px 13px;font-size:12px;font-weight:700;margin-top:8px;display:none;}
+.angle-warn.show{display:block;}
+.angle-ok{background:var(--purple-p);color:var(--purple);border-radius:8px;padding:9px 13px;font-size:13px;font-weight:700;text-align:center;margin-top:6px;}
+#module3 .fase-bar{background:#fcf4ff;border-color:#e7c6ff;}
+#module3 .fase-pill{background:#f3e3ff;color:#7e22ce;}
+#module3 .zona-item{border-color:#01ccff;}
+#module3 .zona-item.sel{border-color:#cc5eff;}
+#module3 #z1-item{border-color:#ec4899;}
+#module3 #z1-item.sel{border-color:#ec4899;}
+#module3 #z3-item{border-color:#d8b4fe;}
+#module3 #z3-item.sel{border-color:#a855f7;}
+#module3 .zri{background:#f3e3ff;}
+#module3 .zri .zrl{color:#9d4edd;}
+#module3 .zri .zrv{color:#7e22ce;}
+#module3 .atbl th{background:#cc5eff;color:#35104f;}
+#module3 .atbl tr:nth-child(even) td,#module3 .atbl .trow td{background:#f3e3ff;}
+#module3 .atbl .trow td{color:#7e22ce;}
+#module3 .angle-ok{background:#f3e3ff;color:#7e22ce;}
+#module3 .input-group input:focus,#module3 .input-group select:focus{border-color:#cc5eff;}
+#module3 .satuan-badge{background:#7e22ce;color:#fff;}
+
+/* TOOLTIP */
+.ttoverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;display:none;}
+.ttoverlay.show{display:flex;}
+.ttcard{background:#fff0f6;border:1px solid #fbcfe8;border-radius:var(--radius);padding:22px;max-width:360px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.25);animation:popIn .25s ease;}
+@keyframes popIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.ttcard h3{font-size:18px;font-weight:900;color:#be185d;margin-bottom:7px;}
+.ttcard .tc-def{font-size:13px;line-height:1.7;color:var(--mid);margin-bottom:8px;}
+.ttcard .tc-rumus{background:#fce7f3;padding:8px 12px;border-radius:7px;font-size:13px;font-weight:700;color:#9d174d;margin-bottom:8px;}
+.ttcard .tc-contoh{font-size:12px;color:#9d174d;font-style:italic;margin-bottom:12px;}
+.ttclose{width:100%;padding:11px;background:#db2777;color:#fff;border:none;border-radius:7px;font-family:'Varela Round',sans-serif;font-size:13px;font-weight:800;cursor:pointer;}
+
+/* RINCIAN */
+.rincian{font-size:12px;color:var(--mid);line-height:2;background:var(--blue-p);border-radius:8px;padding:11px;margin-top:10px;}
+#rincian2{background:linear-gradient(135deg, #e8fbff, #d9f7ff);border:1px solid #9beaff;color:#075b73;}
+#zona-rincian .rincian{background:#f3e3ff;border:1px solid #e7c6ff;color:#7e22ce;}
+
+@media(max-width:480px){.result-grid{grid-template-columns:1fr 1fr;}.zona-results{grid-template-columns:repeat(3,1fr);}.main{padding:10px;}}
+
+/* RESPONSIVE POLISH */
+.app-header{background:linear-gradient(135deg,#fce7f3 0%,#e0f2fe 52%,#fce7f3 100%);}
+.app-header::before{background:radial-gradient(ellipse at 30% 50%,rgba(255,255,255,.55),transparent 65%),radial-gradient(ellipse at 70% 50%,rgba(46,109,180,.08),transparent 65%);}
+.app-header h1{color:#db2777;text-shadow:none;}
+.app-header p{color:#00bae7;}
+.main{width:100%;}
+.card,.module,.input-group,.ri,.zona-item{min-width:0;}
+.result-grid .rv,.kdr-val,#kd-avg,.pi-result,.rincian,.status-bar{overflow-wrap:anywhere;word-break:normal;}
+.atbl,.pi-table{table-layout:fixed;}
+.atbl th,.atbl td,.pi-table th,.pi-table td{overflow-wrap:anywhere;word-break:break-word;}
+#module2 .card-header[style*="44daff"]{color:#075b73!important;}
+.pi-proof-card .pi-table th{background:#087f9c;color:#fff;}
+.park-calculator-card .fase-bar .fase-pill{background:#d9f2f7;color:#075b73;}
+#module3 .fase-pill{background:#f0e7f7;color:#542b70;}
+#module3 .fase-bar .fp-fase{background:#542b70;color:#fff;}
+#module3 .zri .zrl,#module3 .zri .zrv{color:#542b70!important;}
+#module3 .atbl th{background:#6b4a86;color:#fff;}
+#module3 .atbl .trow td{color:#542b70;}
+#module3 .angle-ok{background:#f0e7f7;color:#542b70;}
+#module3 .zangle{color:#542b70;}
+#module3 #z1-disp{color:#9d174d!important;}
+#module3 #z2-disp{color:#075b73!important;}
+#module3 .zona-results .zri{background:#f3eef7!important;}
+canvas{max-width:100%;height:auto;}
+
+/* Zona jogging: gunakan biru lembut dan beri jarak antarbagian. */
+#module3 #z2-item #z2-disp{color:#01ccff!important;}
+#module3 #z2-item .slider-wrap input[type=range]
+#module3 #z2-item .zona-results{gap:8px;}
+#module3 #z2-item .zona-results .zri{background:#edf7fd!important;border:1px solid #cfe6f5;border-radius:8px;}
+#module3 #z2-item .zona-results .zrl,#module3 #z2-item .zona-results .zrv{color:#0c74b7!important;}
+#module3 #z2-item .input-group{margin-top:14px!important;padding:12px 10px 10px!important;border-top:1px solid #cfe6f5;}
+#module3 #z2-biaya{border:1px solid #01ccff}
+#module3 #z2-biaya:focus{border-color:#78b9df;box-shadow:0 0 0 3px rgba(120,185,223,.2);}
+
+/* Samakan aksen warna komponen dengan kategori P1, P2, dan P3. */
+#module1 .kd-calc{background:#fff0f6;border-color:#fbcfe8;}
+#module1 .kd-calc h4{color:#be185d;}
+#module1 .kd-result{background:#db2777;}
+#module1 #kd-kesimpulan{background:linear-gradient(135deg,#be185d,#ec4899)!important;}
+#module3 #z1-item .zona-results .zri{background:#fff0f6!important;border:1px solid #fbcfe8;}
+#module3 #z1-item .zona-results .zrl,#module3 #z1-item .zona-results .zrv{color:#9d174d!important;}
+#module3 #z1-item .input-group{margin-top:14px!important;padding-top:12px;border-top:1px solid #fbcfe8;}
+#module3 #z1-biaya{border-color:#f9a8d4;}
+#module3 #z1-biaya:focus{border-color:#ec4899;box-shadow:0 0 0 3px rgba(236,72,153,.15);}
+#module1 .input-group input:focus,#module1 .input-group select:focus{border-color:#ec4899;}
+
+/* Zona taman bunga: aksen ungu dan jarak jelas dari zona bermain/jogging. */
+#module3 #z3-item{margin-top:0;background:#fff;border-color:#a855f7;}
+#module3 #z3-item.sel{border-color:#7e22ce;}
+#module3 #z3-disp,#module3 #z3-item .zona-results .zrl,#module3 #z3-item .zona-results .zrv{color:#7e22ce!important;}
+#module3 #z3-item .slider-wrap input[type=range]{accent-color:#a855f7!important;}
+#module3 #z3-item .zona-results{gap:8px;}
+#module3 #z3-item .zona-results .zri{background:#f3e8ff!important;border:1px solid #d8b4fe;border-radius:8px;}
+#module3 #z3-item .input-group{margin-top:14px!important;padding:12px 10px 10px!important;border-top:1px solid #d8b4fe;}
+#module3 #z3-biaya{border:1px solid #a855f7;}
+#module3 #z3-biaya:focus{border-color:#7e22ce;box-shadow:0 0 0 3px rgba(126,34,206,.16);}
+
+#module2 .input-group input:focus,#module2 .input-group select:focus{border-color:#087f9c;}
+#module2 .satuan-badge:not(.park-calculator-card .satuan-badge){background:#087f9c;color:#fff;}
+
+#module3 .input-group input:focus,#module3 .input-group select:focus{border-color:#6b4a86;}
+#module3 .pi-dropdown-trigger,#module3 .pi-dropdown-menu{border-color:#D8B4FE;}
+#module3 .pi-dropdown-trigger{color:#542b70;}
+#module3 .pi-dropdown-trigger:hover,#module3 .pi-dropdown.open .pi-dropdown-trigger,#module3 .pi-dropdown-trigger:focus-visible{border-color:#6b4a86;box-shadow:0 0 0 3px rgba(107,74,134,.18);}
+#module3 .pi-dropdown-option{color:#542b70;}
+#module3 .pi-dropdown-option:hover,#module3 .pi-dropdown-option[aria-selected="true"]{background:#F3E8FF;border-color:#e0d1ea;color:#542b70;}
+#module3 .pi-dropdown-chevron,#module3 .pi-dropdown-option-check{color:#6b4a86;}
+#module3 .card:has(#pi-dropdown.open){position:relative;z-index:50;}
+#module3 #pi-dropdown-menu{max-height:min(220px,40vh);overflow-y:auto;}
+
+@media(max-width:640px){
+  .main{padding:10px;}
+  .card{padding:14px;border-radius:14px;}
+  .fase-bar{gap:5px;padding:8px;}
+  .fase-pill{font-size:9px;padding:4px 8px;}
+  .nav-tab{min-width:82px;padding:10px 7px;font-size:10px;}
+  .atbl,.pi-table{font-size:10px;}
+  .atbl th,.atbl td,.pi-table th,.pi-table td{padding:6px 4px;}
+  .atbl th{font-size:9px;}
+  .pi-table th{font-size:9px;}
+  .result-grid .rv{font-size:clamp(12px,4vw,17px);}
+  .kd-row{gap:6px;}
+  .zona-name{font-size:12px;}
+}
+@media(max-width:380px){
+  .main{padding:7px;}
+  .card{padding:11px;}
+  .kd-row{grid-template-columns:1fr;}
+  .atbl th,.atbl td,.pi-table th,.pi-table td{padding:5px 3px;font-size:9px;}
+  .result-grid{gap:6px;}
+  .ri{padding:8px;}
+}
+
+/* Directional module motion, staggered content, and destination-colored wipe. */
+.module{perspective:1200px;}
+.module.active{animation:none;}
+.module.active>.fase-bar,.module.active>.card{animation:none;}
+.module.exiting{will-change:transform,opacity,filter;}
+.main[data-direction="forward"] .module.exiting{animation:moduleExitForward 220ms cubic-bezier(.4,0,1,1) both;}
+.main[data-direction="backward"] .module.exiting{animation:moduleExitBackward 220ms cubic-bezier(.4,0,1,1) both;}
+.main[data-direction="forward"] .module.entering{animation:moduleEnterForward 480ms cubic-bezier(.2,1.2,.35,1) both;}
+.main[data-direction="backward"] .module.entering{animation:moduleEnterBackward 480ms cubic-bezier(.2,1.2,.35,1) both;}
+.module.entering>.fase-bar,.module.entering>.card{animation:moduleChildEnter 420ms cubic-bezier(.2,1.2,.35,1) both;}
+.module.entering>.fase-bar{animation-delay:0ms;}
+.module.entering>.card:nth-of-type(2){animation-delay:60ms;}
+.module.entering>.card:nth-of-type(3){animation-delay:120ms;}
+.module.entering>.card:nth-of-type(4){animation-delay:180ms;}
+@keyframes moduleExitForward{to{transform:translateX(-40px) scale(.96);opacity:0;filter:blur(2px);}}
+@keyframes moduleExitBackward{to{transform:translateX(40px) scale(.96);opacity:0;filter:blur(2px);}}
+@keyframes moduleEnterForward{from{transform:translateX(60px) scale(.94);opacity:0;}to{transform:translateX(0) scale(1);opacity:1;}}
+@keyframes moduleEnterBackward{from{transform:translateX(-60px) scale(.94);opacity:0;}to{transform:translateX(0) scale(1);opacity:1;}}
+@keyframes moduleChildEnter{from{opacity:0;transform:translateY(12px) rotateY(-4deg);}to{opacity:1;transform:translateY(0) rotateY(0);}}
+.nav-tab{position:relative;}
+.nav-tab.active{border-bottom-color:transparent!important;}
+.nav-tab.active::after{content:"";position:absolute;left:10px;right:10px;bottom:0;height:3px;background:currentColor;transform:scaleX(0);animation:tabUnderline 280ms cubic-bezier(.2,1.2,.35,1) forwards;}
+.nav-tab.active[data-direction="forward"]::after{transform-origin:left center;}
+.nav-tab.active[data-direction="backward"]::after{transform-origin:right center;}
+@keyframes tabUnderline{to{transform:scaleX(1);}}
+.nav-tab .ti.tab-bounce{animation:tabIconBounce 420ms cubic-bezier(.2,1.4,.4,1) both;}
+@keyframes tabIconBounce{0%{transform:scale(1);}55%{transform:scale(1.25);}100%{transform:scale(1);}}
+.tab-wipe{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.6;mix-blend-mode:soft-light;transform:scaleX(0);transform-origin:left center;}
+.tab-wipe[data-target="1"]{background:linear-gradient(110deg,#fce7f3,#ec4899);}
+.tab-wipe[data-target="2"]{background:linear-gradient(110deg,#e0f2fe,#44daff);}
+.tab-wipe[data-target="3"]{background:linear-gradient(110deg,#f3e8ff,#a855f7);}
+.tab-wipe.play{animation:wipeSweep 360ms ease-in-out both;}
+@keyframes wipeSweep{0%{transform:scaleX(0);transform-origin:left center;}50%{transform:scaleX(1);transform-origin:left center;}50.01%{transform-origin:right center;}100%{transform:scaleX(0);transform-origin:right center;}}
+@media(max-width:640px){
+  .main[data-direction="forward"] .module.entering{animation-name:moduleEnterForwardMobile;}
+  .main[data-direction="backward"] .module.entering{animation-name:moduleEnterBackwardMobile;}
+  @keyframes moduleEnterForwardMobile{from{transform:translateX(24px) scale(.94);opacity:0;}to{transform:translateX(0) scale(1);opacity:1;}}
+  @keyframes moduleEnterBackwardMobile{from{transform:translateX(-24px) scale(.94);opacity:0;}to{transform:translateX(0) scale(1);opacity:1;}}
+  @keyframes moduleChildEnter{from{opacity:0;transform:translateY(12px) rotateY(-2deg);}to{opacity:1;transform:translateY(0) rotateY(0);}}
+}
+@media(prefers-reduced-motion:reduce){
+  .module.exiting,.module.entering,.module.entering>.fase-bar,.module.entering>.card,.nav-tab .ti.tab-bounce,.tab-wipe.play{animation-duration:0ms!important;transition-duration:0ms!important;}
+  .nav-tab.active::after{animation-duration:0ms!important;transform:scaleX(1);}
+}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <h1 style="font-weight:700;">🌿 Media Pembelajaran Lingkaran</h1>
+  <p style="font-weight:700;">Proyek Taman Kota · SMP · STEAM + PBL + Deep Learning</p>
+</div>
+
+<div class="nav-tabs">
+  <button class="nav-tab m1 active" onclick="showModule(1)">
+    <span class="ti">📐</span>P1 · Unsur
+  </button>
+  <button class="nav-tab m2" onclick="showModule(2)">
+    <span class="ti">📏</span>P2 · K & L
+  </button>
+  <button class="nav-tab m3" onclick="showModule(3)">
+    <span class="ti">🎯</span>P3 · Zona
+  </button>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════════════════
+     MODUL 1 — UNSUR LINGKARAN (P1)
+     ═══════════════════════════════════ -->
+<div class="module active" id="module1">
+
+  <!-- Fase PBL Bar -->
+  <div class="fase-bar">
+    <span class="fase-pill fp-fase">Pertemuan 1</span>
+    <span class="fase-pill fp-pbl">🧩 Fase 1: Orientasi Masalah</span>
+    <span class="fase-pill fp-pbl">🧩 Fase 3: Penyelidikan</span>
+    <span class="fase-pill fp-steam">🔬 S + A + M</span>
+    <span class="fase-pill fp-dl">🧠 Bermakna</span>
+    <span class="fase-pill fp-bk">💡 Interpretasi · Analisis</span>
+  </div>
+
+  <!-- Eksplorasi Unsur -->
+  <div class="card">
+    <div class="card-header" style="color:#be185d;">📐 Eksplorasi Interaktif Unsur Lingkaran</div>
+    <p style="font-size:12px;color:var(--mid);margin-bottom:12px;line-height:1.6;">Pilih unsur → lihat ilustrasinya di lingkaran taman kota + definisi lengkap. Di HP kecil, tap unsur untuk melihat penjelasan pop-up.</p>
+
+    <div class="unsur-grid" style="margin-bottom:12px;">
+      <button class="unsur-btn" onclick="selectUnsur('pusat',this)">⚫ Titik Pusat</button>
+      <button class="unsur-btn" onclick="selectUnsur('jarijari',this)">📏 Jari-jari</button>
+      <button class="unsur-btn" onclick="selectUnsur('diameter',this)">↔️ Diameter</button>
+      <button class="unsur-btn" onclick="selectUnsur('busur',this)">🌙 Busur</button>
+      <button class="unsur-btn" onclick="selectUnsur('tali',this)">〰️ Tali Busur</button>
+      <button class="unsur-btn" onclick="selectUnsur('apotema',this)">⬇️ Apotema</button>
+      <button class="unsur-btn" onclick="selectUnsur('juring',this)">🍕 Juring</button>
+      <button class="unsur-btn" onclick="selectUnsur('tembereng',this)">🌊 Tembereng</button>
+    </div>
+
+    <div style="position:relative;width:100%;aspect-ratio:1/1;max-width:340px;margin:0 auto 12px;">
+      <canvas id="canvas1" style="position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;border:2px solid #fbcfe8;border-radius:var(--rsm);background:#fff0f6;"></canvas>
+    </div>
+
+    <div class="info-box" id="infoBox1">
+      <h3 id="ib1-name">👆 Pilih salah satu unsur di atas</h3>
+      <p id="ib1-def">Klik tombol unsur untuk melihat definisi, notasi matematis, dan contoh nyatanya pada desain Taman Kota Jember.</p>
+      <p class="contoh" id="ib1-contoh"></p>
+      <span class="rumus-tag" id="ib1-rumus" style="display:none;"></span>
+    </div>
+  </div>
+
+  <!-- Kalkulator K÷d (Pendukung LKPD-1 Aktivitas 1 & Tugas Rumah) -->
+  <div class="card kd-calculator-card">
+    <div class="card-header" style="color:#be185d;">🔢 Kalkulator Rasio K ÷ d <small style="font-size:12px;font-weight:400;color:var(--mid);">(Mendukung LKPD-1 Aktivitas 1 & Tugas Rumah)</small></div>
+
+    <div class="fase-bar" style="margin-bottom:10px;">
+      <span class="fase-pill fp-pbl">🧩 Fase 3: Penyelidikan</span>
+      <span class="fase-pill fp-steam">🔬 Science: Pengukuran Empiris</span>
+      <span class="fase-pill fp-bk">💡 Inferensi</span>
+    </div>
+
+    <p style="font-size:12px;color:var(--mid);margin-bottom:10px;line-height:1.6;">
+      Masukkan hasil ukur benda melingkarmu (keliling diukur dengan benang, diameter dengan penggaris). Kalkulator akan menghitung rasio K÷d untuk kamu temukan nilainya!
+    </p>
+
+    <!-- Satuan selector -->
+    <div class="input-group">
+      <label>Satuan Pengukuran <span class="satuan-badge" id="satuan-badge-1">cm</span></label>
+      <input type="hidden" id="satuan1" value="cm">
+      <div class="unit-dropdown" id="unit-dropdown-1">
+        <button type="button" class="unit-dropdown-trigger" id="unit-dropdown-trigger-1" aria-haspopup="listbox" aria-expanded="false" aria-controls="unit-dropdown-menu-1" onclick="toggleUnitDropdown()">
+          <span id="unit-dropdown-current"><span class="unit-option-title">Sentimeter (cm)</span><span class="unit-option-description">Untuk benda sehari-hari</span></span>
+          <span class="unit-dropdown-chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="unit-dropdown-menu" id="unit-dropdown-menu-1" role="listbox" aria-label="Satuan Pengukuran">
+          <button type="button" class="unit-option" role="option" aria-selected="true" data-value="cm" onclick="selectUnit('cm',this)">
+            <span class="unit-option-copy"><span class="unit-option-title">Sentimeter (cm)</span><span class="unit-option-description">Untuk benda sehari-hari</span></span><span class="unit-option-check" aria-hidden="true">✓</span>
+          </button>
+          <button type="button" class="unit-option" role="option" aria-selected="false" data-value="m" onclick="selectUnit('m',this)">
+            <span class="unit-option-copy"><span class="unit-option-title">Meter (m)</span><span class="unit-option-description">Untuk benda besar</span></span><span class="unit-option-check" aria-hidden="true">✓</span>
+          </button>
+          <button type="button" class="unit-option" role="option" aria-selected="false" data-value="mm" onclick="selectUnit('mm',this)">
+            <span class="unit-option-copy"><span class="unit-option-title">Milimeter (mm)</span><span class="unit-option-description">Untuk benda kecil</span></span><span class="unit-option-check" aria-hidden="true">✓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="kd-rows">
+      <!-- Row 1 -->
+      <div style="background:#fff0f6;border-radius:var(--rsm);padding:12px;margin-bottom:8px;border:1px solid #fbcfe8;">
+        <div style="font-size:12px;font-weight:800;color:#be185d;margin-bottom:8px;">Benda 1</div>
+        <div class="kd-row">
+          <div class="input-group" style="margin-bottom:0;">
+            <label>Keliling K <span class="satuan-badge kd-unit">cm</span></label>
+            <input type="number" class="kd-k" placeholder="cth: 31.4" step="0.01" min="0" oninput="hitungKD()">
+          </div>
+          <div class="input-group" style="margin-bottom:0;">
+            <label>Diameter d <span class="satuan-badge kd-unit">cm</span></label>
+            <input type="number" class="kd-d" placeholder="cth: 10" step="0.01" min="0" oninput="hitungKD()">
+          </div>
+        </div>
+        <div class="kd-result" id="kd-res-0">
+          <div class="kdr-label">K ÷ d =</div>
+          <div class="kdr-val">— </div>
+        </div>
+      </div>
+      <!-- Row 2 -->
+      <div style="background:#fff0f6;border-radius:var(--rsm);padding:12px;margin-bottom:8px;border:1px solid #fbcfe8;">
+        <div style="font-size:12px;font-weight:800;color:#be185d;margin-bottom:8px;">Benda 2</div>
+        <div class="kd-row">
+          <div class="input-group" style="margin-bottom:0;">
+            <label>Keliling K <span class="satuan-badge kd-unit">cm</span></label>
+            <input type="number" class="kd-k" placeholder="cth: 62.8" step="0.01" min="0" oninput="hitungKD()">
+          </div>
+          <div class="input-group" style="margin-bottom:0;">
+            <label>Diameter d <span class="satuan-badge kd-unit">cm</span></label>
+            <input type="number" class="kd-d" placeholder="cth: 20" step="0.01" min="0" oninput="hitungKD()">
+          </div>
+        </div>
+        <div class="kd-result" id="kd-res-1">
+          <div class="kdr-label">K ÷ d =</div>
+          <div class="kdr-val">—</div>
+        </div>
+      </div>
+      <!-- Row 3 -->
+      <div style="background:#fff0f6;border-radius:var(--rsm);padding:12px;margin-bottom:8px;border:1px solid #fbcfe8;">
+        <div style="font-size:12px;font-weight:800;color:#be185d;margin-bottom:8px;">Benda 3</div>
+        <div class="kd-row">
+          <div class="input-group" style="margin-bottom:0;">
+            <label>Keliling K <span class="satuan-badge kd-unit">cm</span></label>
+            <input type="number" class="kd-k" placeholder="cth: 94.2" step="0.01" min="0" oninput="hitungKD()">
+          </div>
+          <div class="input-group" style="margin-bottom:0;">
+            <label>Diameter d <span class="satuan-badge kd-unit">cm</span></label>
+            <input type="number" class="kd-d" placeholder="cth: 30" step="0.01" min="0" oninput="hitungKD()">
+          </div>
+        </div>
+        <div class="kd-result" id="kd-res-2">
+          <div class="kdr-label">K ÷ d =</div>
+          <div class="kdr-val">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="kd-kesimpulan" style="display:none;margin-top:10px;background:linear-gradient(135deg,var(--green),var(--green-l));color:#fff;border-radius:var(--rsm);padding:14px;text-align:center;">
+      <div style="font-size:12px;opacity:.9;margin-bottom:4px;">Rata-rata K ÷ d dari 3 bendamu:</div>
+      <div style="font-size:26px;font-weight:900;" id="kd-avg">—</div>
+      <div style="font-size:12px;margin-top:6px;opacity:.85;" id="kd-insight"></div>
+    </div>
+  </div>
+
+  <!-- Hubungan Antar Unsur -->
+  <div class="card">
+    <div class="card-header" style="color:#be185d;">🔗 Hubungan Antar Unsur</div>
+    <div style="display:grid;gap:8px;">
+      <div style="background:#fff0f6;border-radius:9px;padding:12px;border-left:4px solid #db2777;">
+        <div style="font-size:13px;font-weight:800;color:#be185d;margin-bottom:4px;">d = 2r &nbsp;|&nbsp; r = d ÷ 2</div>
+        <div style="font-size:12px;color:var(--mid);">Taman Kota: r = 35 m → d = 70 m. Diameter selalu dua kali jari-jari.</div>
+      </div>
+      <div style="background:#fff0f6;border-radius:9px;padding:12px;border-left:4px solid #db2777;">
+        <div style="font-size:13px;font-weight:800;color:#be185d;margin-bottom:4px;">Apotema ⊥ Tali Busur (sudut 90°)</div>
+        <div style="font-size:12px;color:var(--mid);">Apotema = jarak terpendek dari titik pusat ke tali busur. Selalu tegak lurus.</div>
+      </div>
+      <div style="background:#fff0f6;border-radius:9px;padding:12px;border-left:4px solid #db2777;">
+        <div style="font-size:13px;font-weight:800;color:#9d174d;margin-bottom:4px;">Diameter = Tali Busur Terpanjang</div>
+        <div style="font-size:12px;color:var(--mid);">Semua tali busur yang tidak melalui pusat lebih pendek dari diameter.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Konteks Taman -->
+  <div class="card">
+    <div class="card-header" style="color:#be185d;">🌳 Konteks Taman Kota Jember (r = 35 m)</div>
+    <div style="background:linear-gradient(135deg,#be185d,#ec4899);border-radius:11px;padding:15px;color:#fff;font-size:12px;line-height:1.9;">
+      <strong style="font-size:14px;display:block;margin-bottom:8px;">Taman Kota Jember — r = 35 m, d = 70 m</strong>
+      🏛️ <strong>Titik Pusat (O)</strong> = Tugu utama taman<br>
+      🛤️ <strong>Jari-jari (r = 35 m)</strong> = Jalan dari tugu ke gerbang<br>
+      ↔️ <strong>Diameter (d = 70 m)</strong> = Jalur tengah membelah taman<br>
+      🌙 <strong>Busur</strong> = Tepi taman antara dua gerbang<br>
+      〰️ <strong>Tali Busur</strong> = Jalur lurus memotong taman<br>
+      ⬇️ <strong>Apotema</strong> = Jarak terpendek dari tugu ke jalur lurus<br>
+      🍕 <strong>Juring</strong> = Zona taman (bermain/jogging/bunga)<br>
+      🌊 <strong>Tembereng</strong> = Area antara jalur lurus dan tepi taman
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     MODUL 2 — KELILING & LUAS (P2)
+     ═══════════════════════════════════ -->
+<div class="module" id="module2">
+
+  <div class="fase-bar">
+    <span class="fase-pill fp-fase">Pertemuan 2</span>
+    <span class="fase-pill fp-pbl">🧩 Fase 1: Orientasi</span>
+    <span class="fase-pill fp-pbl">🧩 Fase 3: Penyelidikan</span>
+    <span class="fase-pill fp-pbl">🧩 Fase 4–5: Presentasi</span>
+    <span class="fase-pill fp-steam">🔬 S + T + M</span>
+    <span class="fase-pill fp-dl">🧠 Bermakna · Menyenangkan</span>
+    <span class="fase-pill fp-bk">💡 Analisis · Inferensi · Evaluasi</span>
+  </div>
+
+  <!-- Visualisasi Penurunan π -->
+  <div class="card pi-proof-card">
+    <div class="card-header" style="color:#44daff;">🔬 Membuktikan Nilai π — Visualisasi Interaktif</div>
+    <p style="font-size:12px;color:var(--mid);margin-bottom:12px;line-height:1.6;">
+      Geser slider untuk mengubah jari-jari lingkaran dan lihat bagaimana rasio K÷d <strong>selalu menghasilkan nilai yang sama</strong> — itulah π!
+    </p>
+
+    <div class="input-group">
+      <label>Jari-jari lingkaran untuk eksplorasi π <span class="satuan-badge">cm</span></label>
+      <input type="range" id="pi-r-slider" min="3" max="20" value="7" step="1"
+        style="width:100%;height:6px;accent-color:#44daff;margin-bottom:6px;"
+        oninput="updatePiExplorer()">
+      <div style="text-align:center;font-size:13px;font-weight:700;color:var(--blue);">r = <span id="pi-r-val">7</span> cm &nbsp;→&nbsp; d = <span id="pi-d-val">14</span> cm</div>
+    </div>
+
+    <canvas id="canvas-pi" style="border:2px solid #44daff;border-radius:var(--rsm);background:#f0fcff;margin-bottom:10px;"></canvas>
+
+    <div class="pi-explorer">
+      <h4>📊 Data Investigasi — Berbagai Ukuran Lingkaran</h4>
+      <table class="pi-table" id="piTable">
+        <thead>
+          <tr><th>r (cm)</th><th>d = 2r (cm)</th><th>K = 2πr (cm)</th><th>K ÷ d</th><th>≈</th></tr>
+        </thead>
+        <tbody id="piTableBody"></tbody>
+      </table>
+      <div class="pi-result" id="piResult">
+        Kesimpulan: K ÷ d = π ≈ <span id="piAvg">3,143</span> &nbsp;≈&nbsp; 22/7 &nbsp;≈&nbsp; 3,14
+      </div>
+    </div>
+
+    <div class="rumus-box" style="margin-top:10px;">
+      <p>Dari K ÷ d = π, kita peroleh rumus keliling:</p>
+      <div class="rf">K = π × d = 2πr</div>
+      <p style="margin-top:8px;">Dari penjumlahan juring-juring kecil membentuk persegi panjang:</p>
+      <div class="rf">L = πr²</div>
+      <p style="margin-top:6px;font-size:11px;color:var(--mid);">Nilai π yang digunakan dalam soal: <strong>22/7</strong> (jika r kelipatan 7) atau <strong>3,14</strong></p>
+    </div>
+  </div>
+
+  <!-- Kalkulator Taman -->
+  <div class="card park-calculator-card">
+    <div class="card-header" style="color:#087f9c;border-bottom:2px solid #44daff;padding-bottom:6px;">🏙️ Kalkulator Taman Kota Jember</div>
+
+    <div class="fase-bar" style="margin-bottom:12px;">
+      <span class="fase-pill fp-pbl">🧩 Fase 3: Penyelidikan Terbimbing</span>
+      <span class="fase-pill fp-steam">🔬 E + M: Rekayasa & Matematika</span>
+      <span class="fase-pill fp-bk">💡 Evaluasi</span>
+    </div>
+
+    <!-- Satuan selector -->
+    <div class="input-group">
+      <div class="park-unit-selector">
+        <label>Satuan Ukuran Taman <span class="satuan-badge" id="satuan-badge-2">m</span></label>
+        <input type="hidden" id="satuan2" value="m">
+        <div class="unit-dropdown" id="unit-dropdown-2">
+          <button type="button" class="unit-dropdown-trigger" id="unit-dropdown-trigger-2" aria-haspopup="listbox" aria-expanded="false" aria-controls="unit-dropdown-menu-2" onclick="toggleUnitDropdown2()">
+            <span id="unit-dropdown-current-2"><span class="unit-option-copy"><span class="unit-option-title">Meter (m)</span><span class="unit-option-description">Untuk taman/bangunan</span></span></span>
+            <span class="unit-dropdown-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="unit-dropdown-menu" id="unit-dropdown-menu-2" role="listbox" aria-label="Satuan Ukuran Taman">
+            <button type="button" class="unit-option" role="option" aria-selected="true" onclick="selectUnit2('m',this)">
+              <span class="unit-option-copy"><span class="unit-option-title">Meter (m)</span><span class="unit-option-description">Untuk taman/bangunan</span></span><span class="unit-option-check" aria-hidden="true">✓</span>
+            </button>
+            <button type="button" class="unit-option" role="option" aria-selected="false" onclick="selectUnit2('cm',this)">
+              <span class="unit-option-copy"><span class="unit-option-title">Sentimeter (cm)</span><span class="unit-option-description">Untuk skala model</span></span><span class="unit-option-check" aria-hidden="true">✓</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="unit-note" id="unit-note-2">Semua input dan output menggunakan satuan meter (m)</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div class="input-group" style="grid-column:span 2;">
+        <label>Jari-jari Taman (r) <span class="satuan-badge" id="unit-r2">m</span></label>
+        <input type="number" id="inp-r" value="35" min="1" max="9999" step="0.5">
+        <div class="unit-note">Taman Kota Jember: r = 35 m (sesuai LKPD)</div>
+      </div>
+      <div class="input-group">
+        <label>Biaya Pagar <span style="font-size:10px;color:var(--mid);">(Rp/m)</span></label>
+        <input type="number" id="inp-pagar" value="75000" min="0">
+      </div>
+      <div class="input-group">
+        <label>Biaya Rumput <span style="font-size:10px;color:var(--mid);">(Rp/m²)</span></label>
+        <input type="number" id="inp-rumput" value="15000" min="0">
+      </div>
+      <div class="input-group">
+        <label>Jarak Antar Pohon <span class="satuan-badge" id="unit-jarak">m</span></label>
+        <input type="number" id="inp-jarak" value="5" min="0.1" max="999" step="0.5">
+      </div>
+      <div class="input-group">
+        <label>Pohon yang Dimiliki</label>
+        <input type="number" id="inp-pohon" value="44" min="0">
+      </div>
+      <div class="input-group" style="grid-column:span 2;">
+        <label>Harga per Lampu (Rp)</label>
+        <input type="number" id="inp-lampu" value="350000" min="0">
+      </div>
+    </div>
+
+    <button class="btn-primary btn-blue" onclick="hitungTaman()">🔢 Hitung & Visualisasi</button>
+
+    <div id="results2" style="display:none;">
+      <div class="result-grid">
+        <div class="ri"><div class="rl">JARI-JARI</div><div class="rv" id="r2-r">—</div><div class="ru" id="r2-ru">m</div></div>
+        <div class="ri"><div class="rl">DIAMETER</div><div class="rv" id="r2-d">—</div><div class="ru" id="r2-du">m</div></div>
+        <div class="ri"><div class="rl">KELILING (K = 2πr)</div><div class="rv" id="r2-k">—</div><div class="ru" id="r2-ku">m</div></div>
+        <div class="ri"><div class="rl">LUAS (L = πr²)</div><div class="rv" id="r2-l">—</div><div class="ru" id="r2-lu">m²</div></div>
+        <div class="ri"><div class="rl">JML LAMPU (tiap <span id="r2-jarak-unit">5 m</span>)</div><div class="rv" id="r2-lamp">—</div><div class="ru">unit</div></div>
+        <div class="ri"><div class="rl">STATUS POHON</div><div class="rv" id="r2-tree">—</div><div class="ru" id="r2-tree-u"></div></div>
+        <div class="ri hl"><div class="rl">TOTAL ANGGARAN</div><div class="rv" id="r2-total">—</div><div class="ru">Rupiah</div></div>
+      </div>
+      <div id="status2"></div>
+      <canvas id="canvas2" style="margin-top:14px;border:2px solid #44daff;border-radius:var(--rsm);background:#f0fcff;"></canvas>
+      <div class="rincian" id="rincian2" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     MODUL 3 — ZONA TAMAN / BUSUR & JURING (P3)
+     ═══════════════════════════════════ -->
+<div class="module" id="module3">
+
+  <div class="fase-bar">
+    <span class="fase-pill fp-fase">Pertemuan 3</span>
+    <span class="fase-pill fp-pbl">🧩 Fase 1: Orientasi Masalah</span>
+    <span class="fase-pill fp-pbl">🧩 Fase 3: Penyelidikan</span>
+    <span class="fase-pill fp-pbl">🧩 Fase 4: Pengembangan</span>
+    <span class="fase-pill fp-pbl">🧩 Fase 5: Evaluasi</span>
+    <span class="fase-pill fp-steam">🔬 E + A + M</span>
+    <span class="fase-pill fp-dl">🧠 Memberdayakan</span>
+    <span class="fase-pill fp-bk">💡 Analisis · Inferensi · Evaluasi · Eksplanasi</span>
+  </div>
+
+  <!-- Rumus Box -->
+  <div class="card">
+    <div class="card-header" style="color:#7e22ce;">📐 Rumus Panjang Busur & Luas Juring</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:#f8edff;border-radius:var(--rsm);padding:13px;border-left:4px solid #cc5eff;">
+        <div style="font-size:11px;font-weight:800;color:#9d4edd;margin-bottom:5px;">PANJANG BUSUR</div>
+        <div style="font-size:15px;font-weight:800;color:#7e22ce;font-style:italic;">PB = α/360 × 2πr</div>
+        <div style="font-size:11px;color:var(--mid);margin-top:5px;">α = sudut pusat (°)</div>
+      </div>
+      <div style="background:#f8edff;border-radius:var(--rsm);padding:13px;border-left:4px solid #cc5eff;">
+        <div style="font-size:11px;font-weight:800;color:#9d4edd;margin-bottom:5px;">LUAS JURING</div>
+        <div style="font-size:15px;font-weight:800;color:#7e22ce;font-style:italic;">LJ = α/360 × πr²</div>
+        <div style="font-size:11px;color:var(--mid);margin-top:5px;">Keduanya proporsional terhadap α</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;background:#f8f9fc;border-radius:8px;padding:10px;font-size:12px;color:var(--mid);">
+      💡 <strong>Ide kunci:</strong> Busur & juring adalah <em>bagian proporsional</em> dari lingkaran penuh. Jika sudut pusat = 90° (¼ dari 360°), maka busur = ¼ keliling dan juring = ¼ luas.
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div class="card">
+    <div class="card-header" style="color:#7e22ce;">⚙️ Pengaturan Taman</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div class="input-group">
+        <label>Satuan <span class="satuan-badge" id="satuan-badge-3">m</span></label>
+        <input type="hidden" id="satuan3" value="m">
+        <div class="unit-dropdown" id="unit-dropdown-3">
+          <button type="button" class="unit-dropdown-trigger" id="unit-dropdown-trigger-3" aria-haspopup="listbox" aria-expanded="false" aria-controls="unit-dropdown-menu-3" onclick="toggleUnitDropdown3()">
+            <span id="unit-dropdown-current-3"><span class="unit-option-copy"><span class="unit-option-title">Meter (m)</span><span class="unit-option-description">Untuk taman/bangunan</span></span></span>
+            <span class="unit-dropdown-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="unit-dropdown-menu" id="unit-dropdown-menu-3" role="listbox" aria-label="Satuan Pengaturan Taman">
+            <button type="button" class="unit-option" role="option" aria-selected="true" onclick="selectUnit3('m',this)">
+              <span class="unit-option-copy"><span class="unit-option-title">Meter (m)</span><span class="unit-option-description">Untuk taman/bangunan</span></span><span class="unit-option-check" aria-hidden="true">✓</span>
+            </button>
+            <button type="button" class="unit-option" role="option" aria-selected="false" onclick="selectUnit3('cm',this)">
+              <span class="unit-option-copy"><span class="unit-option-title">Sentimeter (cm)</span><span class="unit-option-description">Untuk skala model</span></span><span class="unit-option-check" aria-hidden="true">✓</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Jari-jari Taman (r) <span class="satuan-badge" id="unit-z-r">m</span></label>
+        <input type="number" id="z-r" value="35" min="1" max="9999" step="0.5" onchange="updateZona()">
+      </div>
+      <div class="input-group" style="grid-column:span 2;">
+        <label>Nilai π yang digunakan</label>
+        <select id="z-pi" class="pi-value-native" tabindex="-1" aria-hidden="true" onchange="updateZona()">
+          <option value="22_7">π = 22/7 ≈ 3,143 (untuk r kelipatan 7)</option>
+          <option value="3.14">π = 3,14</option>
+          <option value="3.14159">π = 3,14159 (lebih tepat)</option>
+        </select>
+        <div class="pi-dropdown" id="pi-dropdown">
+          <button type="button" class="pi-dropdown-trigger" id="pi-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="pi-dropdown-menu" onclick="togglePiDropdown()">
+            <span id="pi-dropdown-current">π = 22/7 ≈ 3,143 (untuk r kelipatan 7)</span>
+            <span class="pi-dropdown-chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="pi-dropdown-menu" id="pi-dropdown-menu" role="listbox" aria-label="Nilai π yang digunakan">
+            <button type="button" class="pi-dropdown-option" role="option" aria-selected="true" onclick="selectPi('22_7',this)"><span class="pi-dropdown-option-copy">π = 22/7 ≈ 3,143 (untuk r kelipatan 7)</span><span class="pi-dropdown-option-check" aria-hidden="true">✓</span></button>
+            <button type="button" class="pi-dropdown-option" role="option" aria-selected="false" onclick="selectPi('3.14',this)"><span class="pi-dropdown-option-copy">π = 3,14</span><span class="pi-dropdown-option-check" aria-hidden="true">✓</span></button>
+            <button type="button" class="pi-dropdown-option" role="option" aria-selected="false" onclick="selectPi('3.14159',this)"><span class="pi-dropdown-option-copy">π = 3,14159 (lebih tepat)</span><span class="pi-dropdown-option-check" aria-hidden="true">✓</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zona Controls -->
+  <div class="card">
+    <div class="card-header" style="color:#7e22ce;">🎯 Atur Zona Taman (Total Sudut = 360°)</div>
+
+    <!-- Zona 1 -->
+    <div class="zona-item" id="z1-item">
+      <div class="zona-header">
+        <div class="zona-name"><div class="zdot" style="background:#ec4899;"></div>🎪 Zona Bermain Anak</div>
+        <div class="zangle" id="z1-disp" style="color:#9d174d;">120°</div>
+      </div>
+      <div class="slider-wrap">
+        <input type="range" id="z1-s" min="10" max="330" value="120" style="accent-color:#ec4899;"
+          oninput="document.getElementById('z1-disp').textContent=this.value+'°';updateZona()">
+      </div>
+      <div class="zona-results">
+        <div class="zri" style="background:#fff0f6;"><div class="zrl" style="color:#9d174d;">SUDUT</div><div class="zrv" style="color:#9d174d;" id="z1-ra">120°</div></div>
+        <div class="zri" style="background:#fff0f6;"><div class="zrl" style="color:#9d174d;">BUSUR</div><div class="zrv" style="color:#9d174d;" id="z1-rb">—</div></div>
+        <div class="zri" style="background:#fff0f6;"><div class="zrl" style="color:#9d174d;">LUAS</div><div class="zrv" style="color:#9d174d;" id="z1-rl">—</div></div>
+      </div>
+      <div class="input-group" style="margin-top:8px;margin-bottom:0;">
+        <label style="font-size:11px;">Biaya Pembangunan <span style="font-size:10px;color:var(--mid);">(Rp/m²)</span></label>
+        <input type="number" id="z1-biaya" value="2500000" min="0" onchange="updateZona()" style="font-size:13px;padding:8px 12px;">
+      </div>
+    </div>
+
+    <!-- Zona 2 -->
+    <div class="zona-item" id="z2-item">
+      <div class="zona-header">
+        <div class="zona-name"><div class="zdot" style="background:#01ccff;"></div>🏃 Zona Jogging</div>
+        <div class="zangle" id="z2-disp" style="color:#01ccff;">150°</div>
+      </div>
+      <div class="slider-wrap">
+        <input type="range" id="z2-s" min="10" max="330" value="150" style="accent-color:#01ccff;"
+          oninput="document.getElementById('z2-disp').textContent=this.value+'°';updateZona()">
+      </div>
+      <div class="zona-results">
+        <div class="zri" style="background:#a3edff;"><div class="zrl" style="color:#01ccff;">SUDUT</div><div class="zrv" style="color:#01ccff;" id="z2-ra">150°</div></div>
+        <div class="zri" style="background:#a3edff;"><div class="zrl" style="color:#01ccff;">BUSUR</div><div class="zrv" style="color:#01ccff;" id="z2-rb">—</div></div>
+        <div class="zri" style="background:#a3edff;"><div class="zrl" style="color:#01ccff;">LUAS</div><div class="zrv" style="color:#01ccff;" id="z2-rl">—</div></div>
+      </div>
+      <div class="input-group" style="margin-top:8px;margin-bottom:0;">
+        <label style="font-size:11px;">Biaya Pembangunan <span style="font-size:10px;color:var(--mid);">(Rp/m²)</span></label>
+        <input type="number" id="z2-biaya" value="800000" min="0" onchange="updateZona()" style="font-size:13px;padding:8px 12px;">
+      </div>
+    </div>
+
+    <!-- Zona 3 -->
+    <div class="zona-item" id="z3-item">
+      <div class="zona-header">
+        <div class="zona-name"><div class="zdot" style="background:#cc5eff;"></div>🌸 Zona Taman Bunga</div>
+        <div class="zangle" id="z3-disp" style="color:#7e22ce;">90°</div>
+      </div>
+      <div class="slider-wrap">
+        <input type="range" id="z3-s" min="10" max="330" value="90" style="accent-color:#cc5eff;"
+          oninput="document.getElementById('z3-disp').textContent=this.value+'°';updateZona()">
+      </div>
+      <div class="zona-results">
+        <div class="zri"><div class="zrl">SUDUT</div><div class="zrv" id="z3-ra">90°</div></div>
+        <div class="zri"><div class="zrl">BUSUR</div><div class="zrv" id="z3-rb">—</div></div>
+        <div class="zri"><div class="zrl">LUAS</div><div class="zrv" id="z3-rl">—</div></div>
+      </div>
+      <div class="input-group" style="margin-top:8px;margin-bottom:0;">
+        <label style="font-size:11px;">Biaya Pembangunan <span style="font-size:10px;color:var(--mid);">(Rp/m²)</span></label>
+        <input type="number" id="z3-biaya" value="1200000" min="0" onchange="updateZona()" style="font-size:13px;padding:8px 12px;">
+      </div>
+    </div>
+
+    <div class="angle-warn" id="angleWarn">⚠️ Total sudut = <span id="totalAngle">—</span>° · Harus = 360°! Sesuaikan slider.</div>
+    <div class="angle-ok" id="angleOk">✅ Total sudut = <span id="totalAngleOk">360</span>° — Tepat!</div>
+  </div>
+
+  <!-- Visualisasi & Anggaran -->
+  <div class="card">
+    <div class="card-header" style="color:#7e22ce;">🗺️ Visualisasi Zona Taman</div>
+    <canvas id="canvas3" style="border:2px solid #e7c6ff;border-radius:var(--rsm);background:#fdfaff;"></canvas>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
+      <div style="display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;"><div style="width:12px;height:12px;background:#ec4899;border-radius:2px;"></div>🎪 Bermain Anak</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;"><div style="width:12px;height:12px;background:#01ccff;border-radius:2px;"></div>🏃 Jogging</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;"><div style="width:12px;height:12px;background:#cc5eff;border-radius:2px;"></div>🌸 Taman Bunga</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="color:#7e22ce;">💰 Rencana Anggaran Taman Kota</div>
+    <table class="atbl">
+      <thead><tr><th>Zona</th><th>Luas</th><th>Biaya/m²</th><th>Total Zona</th></tr></thead>
+      <tbody id="anggaranBody"></tbody>
+      <tfoot><tr class="trow"><td colspan="3">TOTAL ANGGARAN</td><td id="totalAnggaran">—</td></tr></tfoot>
+    </table>
+    <div id="zona-rincian" style="margin-top:10px;"></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- TOOLTIP OVERLAY -->
+<div class="ttoverlay" id="ttoverlay" onclick="closeTooltip(event)">
+  <div class="ttcard" onclick="event.stopPropagation()">
+    <h3 id="tt-name">—</h3>
+    <div class="tc-def" id="tt-def">—</div>
+    <div class="tc-rumus" id="tt-rumus" style="display:none;"></div>
+    <div class="tc-contoh" id="tt-contoh">—</div>
+    <button class="ttclose" onclick="closeTooltip()">✓ Mengerti!</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════
+// DATA UNSUR
+// ══════════════════════════
+const UD = {
+  pusat:{name:"Titik Pusat (O)",def:"Titik yang berada tepat di tengah lingkaran. Semua titik pada lingkaran berjarak sama terhadap titik pusat ini — jarak tersebut disebut jari-jari.",rumus:"Simbol: O",contoh:"🏛️ Taman: Lokasi tugu utama di pusat taman."},
+  jarijari:{name:"Jari-jari (r)",def:"Ruas garis dari titik pusat ke sembarang titik di lingkaran. Semua jari-jari satu lingkaran sama panjang.",rumus:"r = d ÷ 2",contoh:"🛤️ Taman: Jalan setapak dari tugu pusat ke gerbang masuk (r = 35 m)."},
+  diameter:{name:"Diameter (d)",def:"Ruas garis melalui titik pusat dengan kedua ujung di lingkaran. Diameter adalah tali busur terpanjang.",rumus:"d = 2r",contoh:"↔️ Taman: Jalur tengah membelah taman dari satu sisi ke sisi lain (d = 70 m)."},
+  busur:{name:"Busur (arc AB)",def:"Bagian dari keliling lingkaran yang dibatasi dua titik pada lingkaran. Busur minor = bagian pendek; busur mayor = bagian panjang.",rumus:"Panjang Busur = (α/360) × 2πr",contoh:"🌙 Taman: Tepi taman antara dua titik gerbang masuk."},
+  tali:{name:"Tali Busur",def:"Ruas garis menghubungkan dua titik di lingkaran tanpa melalui titik pusat. Selalu lebih pendek dari diameter.",rumus:"Tali Busur < d (selalu)",contoh:"〰️ Taman: Jalur lurus yang memotong area taman — lebih pendek dari jalur diameter."},
+  apotema:{name:"Apotema",def:"Garis terpendek dari titik pusat ke tali busur. Selalu tegak lurus (90°) terhadap tali busur. Ini adalah jarak minimum dari pusat ke tali busur.",rumus:"Apotema ⊥ Tali Busur",contoh:"⬇️ Taman: Jarak terpendek dari tugu pusat ke jalur lurus yang ada di taman."},
+  juring:{name:"Juring (Sektor)",def:"Daerah yang dibatasi dua jari-jari dan sebuah busur. Bentuknya seperti irisan pizza. Besar juring bergantung pada besar sudut pusatnya.",rumus:"Luas Juring = (α/360) × πr²",contoh:"🍕 Taman: Zona-zona taman (bermain 120°, jogging 150°, bunga 90°)."},
+  tembereng:{name:"Tembereng (Segmen)",def:"Daerah yang dibatasi tali busur dan busur yang bersesuaian. Berbeda dari juring yang dibatasi dua jari-jari.",rumus:"Tembereng = Luas Juring − Luas Segitiga",contoh:"🌊 Taman: Area taman antara jalur lurus dan tepi melingkar — cocok untuk tanaman perdu."}
+};
+
+// ══════════════════════════
+// MODULE 1 — UNSUR
+// ══════════════════════════
+let c1,ctx1,c1AnimationFrame=0;
+function initC1(){
+  c1=document.getElementById('canvas1');
+  const s=c1.parentElement.clientWidth,dpr=window.devicePixelRatio||1;
+  c1.width=Math.round(s*dpr);c1.height=Math.round(s*dpr);
+  ctx1=c1.getContext('2d');
+  ctx1.setTransform(dpr,0,0,dpr,0,0);
+  drawU(null);
+}
+
+function renderU(key,progress=1){
+  if(!ctx1)return;
+  const W=c1.clientWidth,H=c1.clientHeight,cx=W/2,cy=H/2,r=W*0.36;
+  ctx1.clearRect(0,0,W,H);
+  // grid
+  ctx1.strokeStyle='#f0f0f0';ctx1.lineWidth=1;
+  for(let x=0;x<W;x+=28){ctx1.beginPath();ctx1.moveTo(x,0);ctx1.lineTo(x,H);ctx1.stroke();}
+  for(let y=0;y<H;y+=28){ctx1.beginPath();ctx1.moveTo(0,y);ctx1.lineTo(W,y);ctx1.stroke();}
+  // base circle
+  ctx1.beginPath();ctx1.arc(cx,cy,r,0,Math.PI*2);
+  ctx1.fillStyle='rgba(255,182,193,0.35)';ctx1.fill();
+  ctx1.strokeStyle='#ec4899';ctx1.lineWidth=3;ctx1.stroke();
+
+  // Reveal the selected construction outward from the center.
+  ctx1.save();
+  ctx1.beginPath();ctx1.arc(cx,cy,Math.max(1,r*progress),0,Math.PI*2);ctx1.clip();
+
+  const G='#ec4899',A='#e74c3c';
+  ctx1.font=`bold ${W*0.05}px 'Varela Round'`;ctx1.textAlign='center';
+
+  if(key==='pusat'){
+    ctx1.beginPath();ctx1.arc(cx,cy,12,0,Math.PI*2);ctx1.fillStyle=G;ctx1.fill();
+    ctx1.fillStyle=G;ctx1.fillText('O',cx+22,cy-18);
+  }
+  else if(key==='jarijari'){
+    const ang=-Math.PI/4,ex=cx+r*Math.cos(ang),ey=cy+r*Math.sin(ang);
+    ctx1.beginPath();ctx1.moveTo(cx,cy);ctx1.lineTo(ex,ey);
+    ctx1.strokeStyle=A;ctx1.lineWidth=4;ctx1.stroke();
+    ctx1.beginPath();ctx1.arc(cx,cy,8,0,Math.PI*2);ctx1.fillStyle=G;ctx1.fill();
+    ctx1.fillStyle=A;ctx1.fillText('r',(cx+ex)/2-14,(cy+ey)/2-10);
+    const ang2=Math.PI/3,ex2=cx+r*Math.cos(ang2),ey2=cy+r*Math.sin(ang2);
+    ctx1.beginPath();ctx1.moveTo(cx,cy);ctx1.lineTo(ex2,ey2);
+    ctx1.strokeStyle='rgba(231,76,60,.35)';ctx1.lineWidth=2.5;ctx1.setLineDash([6,4]);ctx1.stroke();ctx1.setLineDash([]);
+  }
+  else if(key==='diameter'){
+    ctx1.beginPath();ctx1.moveTo(cx-r,cy);ctx1.lineTo(cx+r,cy);
+    ctx1.strokeStyle=A;ctx1.lineWidth=5;ctx1.stroke();
+    ctx1.beginPath();ctx1.arc(cx,cy,8,0,Math.PI*2);ctx1.fillStyle=G;ctx1.fill();
+    ctx1.fillStyle=A;ctx1.fillText('d',cx,cy-16);
+    ctx1.font=`${W*0.038}px 'Varela Round'`;ctx1.fillStyle='rgba(231,76,60,.6)';
+    ctx1.fillText('r',cx-r/2,cy+26);ctx1.fillText('r',cx+r/2,cy+26);
+    ctx1.beginPath();ctx1.moveTo(cx,cy-8);ctx1.lineTo(cx,cy+8);
+    ctx1.strokeStyle='rgba(231,76,60,.5)';ctx1.lineWidth=2;ctx1.stroke();
+  }
+  else if(key==='busur'){
+    const a1=-Math.PI/6,a2=Math.PI/2;
+    ctx1.beginPath();ctx1.arc(cx,cy,r,a1,a2);ctx1.strokeStyle=A;ctx1.lineWidth=9;ctx1.stroke();
+    ctx1.beginPath();ctx1.arc(cx,cy,r,a2,a1+Math.PI*2);ctx1.strokeStyle='rgba(45,155,90,.3)';ctx1.lineWidth=3;ctx1.stroke();
+    [a1,a2].forEach(a=>{ctx1.beginPath();ctx1.arc(cx+r*Math.cos(a),cy+r*Math.sin(a),7,0,Math.PI*2);ctx1.fillStyle=A;ctx1.fill();});
+    const mid=(a1+a2)/2;
+    ctx1.fillStyle=A;ctx1.font=`bold ${W*0.042}px 'Varela Round'`;ctx1.fillText('Busur',cx+(r+26)*Math.cos(mid),cy+(r+26)*Math.sin(mid));
+  }
+  else if(key==='tali'){
+    const a1=-Math.PI/3,a2=Math.PI/1.6;
+    const x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1),x2=cx+r*Math.cos(a2),y2=cy+r*Math.sin(a2);
+    ctx1.beginPath();ctx1.moveTo(x1,y1);ctx1.lineTo(x2,y2);ctx1.strokeStyle=A;ctx1.lineWidth=5;ctx1.stroke();
+    [[x1,y1],[x2,y2]].forEach(([px,py])=>{ctx1.beginPath();ctx1.arc(px,py,7,0,Math.PI*2);ctx1.fillStyle=A;ctx1.fill();});
+    ctx1.fillStyle=A;ctx1.font=`bold ${W*0.038}px 'Varela Round'`;ctx1.fillText('Tali Busur',(x1+x2)/2,(y1+y2)/2-16);
+    ctx1.beginPath();ctx1.moveTo(cx-r,cy);ctx1.lineTo(cx+r,cy);
+    ctx1.strokeStyle='rgba(26,106,60,.2)';ctx1.lineWidth=2;ctx1.setLineDash([8,5]);ctx1.stroke();ctx1.setLineDash([]);
+    ctx1.fillStyle='rgba(26,106,60,.45)';ctx1.font=`${W*0.03}px 'Varela Round'`;ctx1.fillText('(diameter — lebih panjang)',cx,cy+22);
+  }
+  else if(key==='apotema'){
+    const a1=-Math.PI/4,a2=Math.PI*.8;
+    const x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1),x2=cx+r*Math.cos(a2),y2=cy+r*Math.sin(a2);
+    ctx1.beginPath();ctx1.moveTo(x1,y1);ctx1.lineTo(x2,y2);ctx1.strokeStyle='rgba(45,155,90,.5)';ctx1.lineWidth=3;ctx1.stroke();
+    const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy);
+    const t=((cx-x1)*dx+(cy-y1)*dy)/(len*len),fx=x1+t*dx,fy=y1+t*dy;
+    ctx1.beginPath();ctx1.moveTo(cx,cy);ctx1.lineTo(fx,fy);ctx1.strokeStyle=A;ctx1.lineWidth=5;ctx1.stroke();
+    const ux=(x1-x2)/len*14,uy=(y1-y2)/len*14;
+    ctx1.beginPath();ctx1.moveTo(fx+ux,fy+uy);ctx1.lineTo(fx+ux+(cy-fy)*14/len,fy+uy-(cx-fx)*14/len);ctx1.lineTo(fx+(cy-fy)*14/len,fy-(cx-fx)*14/len);
+    ctx1.strokeStyle='#555';ctx1.lineWidth=2;ctx1.stroke();
+    ctx1.fillStyle=A;ctx1.font=`bold ${W*0.042}px 'Varela Round'`;ctx1.fillText('a',(cx+fx)/2+22,(cy+fy)/2);
+    ctx1.beginPath();ctx1.arc(cx,cy,8,0,Math.PI*2);ctx1.fillStyle=G;ctx1.fill();
+    ctx1.beginPath();ctx1.arc(fx,fy,6,0,Math.PI*2);ctx1.fillStyle=A;ctx1.fill();
+  }
+  else if(key==='juring'){
+    const a1=-Math.PI/2,a2=Math.PI/6;
+    ctx1.beginPath();ctx1.moveTo(cx,cy);ctx1.arc(cx,cy,r,a1,a2);ctx1.closePath();
+    ctx1.fillStyle='rgba(231,76,60,.35)';ctx1.fill();ctx1.strokeStyle=A;ctx1.lineWidth=3;ctx1.stroke();
+    ctx1.beginPath();ctx1.arc(cx,cy,r*.28,a1,a2);ctx1.strokeStyle=A;ctx1.lineWidth=2;ctx1.stroke();
+    const mid=(a1+a2)/2;
+    ctx1.fillStyle=A;ctx1.font=`bold ${W*0.042}px 'Varela Round'`;
+    ctx1.fillText('α°',cx+r*.34*Math.cos(mid),cy+r*.34*Math.sin(mid));
+    ctx1.fillText('Juring',cx+r*.6*Math.cos(mid),cy+r*.6*Math.sin(mid));
+    ctx1.beginPath();ctx1.arc(cx,cy,8,0,Math.PI*2);ctx1.fillStyle=G;ctx1.fill();
+  }
+  else if(key==='tembereng'){
+    const a1=Math.PI*.1,a2=Math.PI*.9;
+    const x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1),x2=cx+r*Math.cos(a2),y2=cy+r*Math.sin(a2);
+    ctx1.beginPath();ctx1.arc(cx,cy,r,a1,a2);ctx1.lineTo(x1,y1);ctx1.closePath();
+    ctx1.fillStyle='rgba(142,68,173,.35)';ctx1.fill();ctx1.strokeStyle='#8e44ad';ctx1.lineWidth=3;ctx1.stroke();
+    ctx1.beginPath();ctx1.moveTo(x1,y1);ctx1.lineTo(x2,y2);ctx1.strokeStyle='#8e44ad';ctx1.lineWidth=4;ctx1.stroke();
+    ctx1.fillStyle='#8e44ad';ctx1.font=`bold ${W*0.04}px 'Varela Round'`;
+    ctx1.fillText('Tembereng',cx,cy+r*.72);ctx1.fillText('Tali Busur',(x1+x2)/2,(y1+y2)/2+20);
+  }
+  else {
+    ctx1.beginPath();ctx1.arc(cx,cy,8,0,Math.PI*2);ctx1.fillStyle=G;ctx1.fill();
+    ctx1.fillStyle='#888';ctx1.font=`${W*0.037}px 'Varela Round'`;ctx1.fillText('← pilih unsur',cx,cy+30);
+  }
+  ctx1.restore();
+}
+
+function drawU(key){
+  if(c1AnimationFrame)cancelAnimationFrame(c1AnimationFrame);
+  if(!ctx1)return;
+  if(!key){renderU(key,1);return;}
+  const start=performance.now(),duration=matchMedia('(prefers-reduced-motion: reduce)').matches?0:400;
+  const frame=now=>{
+    const t=Math.min(1,(now-start)/duration),ease=1-Math.pow(1-t,4);
+    renderU(key,ease);
+    if(t<1)c1AnimationFrame=requestAnimationFrame(frame);else c1AnimationFrame=0;
+  };
+  c1AnimationFrame=requestAnimationFrame(frame);
+}
+
+function selectUnsur(key,btn){
+  document.querySelectorAll('.unsur-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  drawU(key);
+  const d=UD[key];
+  document.getElementById('ib1-name').textContent=d.name;
+  document.getElementById('ib1-def').textContent=d.def;
+  document.getElementById('ib1-contoh').textContent=d.contoh;
+  const infoBox=document.getElementById('infoBox1');
+  infoBox.classList.remove('info-swap');void infoBox.offsetWidth;infoBox.classList.add('info-swap');
+  const rt=document.getElementById('ib1-rumus');
+  if(d.rumus){rt.textContent=d.rumus;rt.style.display='inline-block';}else rt.style.display='none';
+  if(window.innerWidth<600){
+    document.getElementById('tt-name').textContent=d.name;
+    document.getElementById('tt-def').textContent=d.def;
+    const tr=document.getElementById('tt-rumus');
+    if(d.rumus){tr.textContent=d.rumus;tr.style.display='block';}else tr.style.display='none';
+    document.getElementById('tt-contoh').textContent=d.contoh;
+    document.getElementById('ttoverlay').classList.add('show');
+  }
+}
+function closeTooltip(e){if(!e||e.target===document.getElementById('ttoverlay'))document.getElementById('ttoverlay').classList.remove('show');}
+
+// ══════════════════════════
+// KALKULATOR K÷d (Modul 1)
+// ══════════════════════════
+function updateSatuan1(){
+  const s=document.getElementById('satuan1').value;
+  document.getElementById('satuan-badge-1').textContent=s;
+  document.querySelectorAll('.kd-unit').forEach(el=>el.textContent=s);
+  hitungKD();
+}
+
+function toggleUnitDropdown(force){
+  const dropdown=document.getElementById('unit-dropdown-1');
+  const trigger=document.getElementById('unit-dropdown-trigger-1');
+  const open=typeof force==='boolean'?force:!dropdown.classList.contains('open');
+  dropdown.classList.toggle('open',open);
+  trigger.setAttribute('aria-expanded',String(open));
+}
+
+function selectUnit(value,option){
+  document.getElementById('satuan1').value=value;
+  const copy=option.querySelector('.unit-option-copy').cloneNode(true);
+  document.getElementById('unit-dropdown-current').replaceChildren(copy);
+  document.querySelectorAll('#unit-dropdown-menu-1 .unit-option').forEach(item=>item.setAttribute('aria-selected',String(item===option)));
+  toggleUnitDropdown(false);
+  updateSatuan1();
+}
+
+document.addEventListener('click',e=>{
+  const dropdown=document.getElementById('unit-dropdown-1');
+  if(dropdown&&!dropdown.contains(e.target))toggleUnitDropdown(false);
+  const dropdown2=document.getElementById('unit-dropdown-2');
+  if(dropdown2&&!dropdown2.contains(e.target))toggleUnitDropdown2(false);
+  const dropdown3=document.getElementById('unit-dropdown-3');
+  if(dropdown3&&!dropdown3.contains(e.target))toggleUnitDropdown3(false);
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){toggleUnitDropdown(false);toggleUnitDropdown2(false);toggleUnitDropdown3(false);}
+});
+
+function toggleUnitDropdown2(force){
+  const dropdown=document.getElementById('unit-dropdown-2');
+  const trigger=document.getElementById('unit-dropdown-trigger-2');
+  const open=typeof force==='boolean'?force:!dropdown.classList.contains('open');
+  dropdown.classList.toggle('open',open);
+  trigger.setAttribute('aria-expanded',String(open));
+}
+
+function selectUnit2(value,option){
+  document.getElementById('satuan2').value=value;
+  document.getElementById('unit-dropdown-current-2').replaceChildren(option.querySelector('.unit-option-copy').cloneNode(true));
+  document.querySelectorAll('#unit-dropdown-menu-2 .unit-option').forEach(item=>item.setAttribute('aria-selected',String(item===option)));
+  toggleUnitDropdown2(false);
+  updateSatuan2();
+}
+
+function toggleUnitDropdown3(force){
+  const dropdown=document.getElementById('unit-dropdown-3');
+  const trigger=document.getElementById('unit-dropdown-trigger-3');
+  const open=typeof force==='boolean'?force:!dropdown.classList.contains('open');
+  dropdown.classList.toggle('open',open);
+  trigger.setAttribute('aria-expanded',String(open));
+}
+
+function togglePiDropdown(force){
+  const dropdown=document.getElementById('pi-dropdown');
+  const trigger=document.getElementById('pi-dropdown-trigger');
+  const open=typeof force==='boolean'?force:!dropdown.classList.contains('open');
+  dropdown.classList.toggle('open',open);
+  trigger.setAttribute('aria-expanded',String(open));
+}
+
+function selectPi(value,option){
+  const select=document.getElementById('z-pi');
+  select.value=value;
+  document.getElementById('pi-dropdown-current').textContent=option.querySelector('.pi-dropdown-option-copy').textContent;
+  document.querySelectorAll('#pi-dropdown-menu .pi-dropdown-option').forEach(item=>item.setAttribute('aria-selected',String(item===option)));
+  togglePiDropdown(false);
+  updateZona();
+}
+
+function selectUnit3(value,option){
+  document.getElementById('satuan3').value=value;
+  document.getElementById('unit-dropdown-current-3').replaceChildren(option.querySelector('.unit-option-copy').cloneNode(true));
+  document.querySelectorAll('#unit-dropdown-menu-3 .unit-option').forEach(item=>item.setAttribute('aria-selected',String(item===option)));
+  toggleUnitDropdown3(false);
+  updateSatuan3();
+}
+
+function hitungKD(){
+  const ks=[...document.querySelectorAll('.kd-k')];
+  const ds=[...document.querySelectorAll('.kd-d')];
+  const unit=document.getElementById('satuan1').value;
+  let vals=[],allFilled=true;
+
+  ks.forEach((ki,i)=>{
+    const k=parseFloat(ki.value),d=parseFloat(ds[i].value);
+    const res=document.getElementById('kd-res-'+i);
+    if(k>0&&d>0){
+      const ratio=(k/d);
+      res.querySelector('.kdr-val').textContent=ratio.toFixed(4);
+      vals.push(ratio);
+    } else {
+      res.querySelector('.kdr-val').textContent='—';
+      allFilled=false;
+    }
+  });
+
+  const kesEl=document.getElementById('kd-kesimpulan');
+  if(vals.length>0){
+    kesEl.style.display='block';
+    const avg=vals.reduce((a,b)=>a+b,0)/vals.length;
+    document.getElementById('kd-avg').textContent=avg.toFixed(4);
+    let insight='';
+    if(Math.abs(avg-Math.PI)<0.1) insight='✅ Sangat dekat dengan π (3,14159...)! Ini membuktikan π adalah konstanta universal.';
+    else if(Math.abs(avg-Math.PI)<0.3) insight='🤔 Mendekati π. Coba ukur ulang dengan lebih teliti!';
+    else insight='⚠️ Jauh dari π. Periksa pengukuran keliling dan diametermu ya!';
+    document.getElementById('kd-insight').textContent=insight;
+  } else {
+    kesEl.style.display='none';
+  }
+}
+
+// ══════════════════════════
+// MODUL 2 — π EXPLORER
+// ══════════════════════════
+function updatePiExplorer(){
+  const r=parseInt(document.getElementById('pi-r-slider').value);
+  document.getElementById('pi-r-val').textContent=r;
+  document.getElementById('pi-d-val').textContent=2*r;
+
+  const PI=22/7;
+  const rows=[3,5,7,10,14,21];
+  const tbody=document.getElementById('piTableBody');
+  tbody.innerHTML=rows.map(rv=>{
+    const d=2*rv,K=2*PI*rv,ratio=K/d;
+    const hl=rv===r;
+    return `<tr class="${hl?'highlight-row':''}">
+      <td>${rv}</td><td>${d}</td><td>${K.toFixed(2)}</td>
+      <td><strong>${ratio.toFixed(4)}</strong></td>
+      <td>${Math.abs(ratio-Math.PI)<0.01?'≈ π ✓':'≈ 3,143'}</td>
+    </tr>`;
+  }).join('');
+
+  drawPiCanvas(r);
+}
+
+function drawPiCanvas(r){
+  const c=document.getElementById('canvas-pi');
+  const W=c.offsetWidth||300;
+  const H=Math.round(W*0.45),dpr=window.devicePixelRatio||1;
+  c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);c.style.height=H+'px';
+  const ctx=c.getContext('2d');
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#f0fcff';ctx.fillRect(0,0,W,H);
+
+  const PI=22/7,K=2*PI*r;
+  const cx=H*0.45,cy=H/2,drawR=H*0.38;
+  const scale=drawR/r;
+
+  // Circle
+  ctx.beginPath();ctx.arc(cx,cy,drawR,0,Math.PI*2);
+  ctx.fillStyle='rgba(68,218,255,.18)';ctx.fill();
+  ctx.strokeStyle='#44daff';ctx.lineWidth=3;ctx.stroke();
+  // Labels
+  ctx.fillStyle='#087f9c';ctx.font=`bold ${H*0.11}px 'Varela Round'`;ctx.textAlign='center';
+  ctx.fillText('r='+r+'cm',cx,cy+4);
+  ctx.fillStyle='#888';ctx.font=`${H*0.08}px 'Varela Round'`;
+  ctx.fillText('d='+2*r+'cm',cx,cy+H*0.18);
+
+  // Unwrap arrow → K line
+  const lineX=cx+drawR+12,lineEndX=Math.min(W-10,lineX+K*scale);
+  // Line
+  ctx.beginPath();ctx.moveTo(lineX,cy);ctx.lineTo(lineEndX,cy);
+  ctx.strokeStyle='#087f9c';ctx.lineWidth=6;ctx.stroke();
+  // Arrow
+  ctx.beginPath();ctx.moveTo(lineEndX,cy-8);ctx.lineTo(lineEndX+10,cy);ctx.lineTo(lineEndX,cy+8);
+  ctx.fillStyle='#087f9c';ctx.fill();
+  // K label
+  ctx.fillStyle='#087f9c';ctx.font=`bold ${H*0.1}px 'Varela Round'`;ctx.textAlign='center';
+  ctx.fillText('K='+K.toFixed(1)+'cm',(lineX+lineEndX)/2,cy-12);
+
+  // π equation
+  ctx.fillStyle='#075b73';ctx.font=`bold ${H*0.09}px 'Varela Round'`;ctx.textAlign='left';
+  ctx.fillText('K÷d = '+K.toFixed(2)+' ÷ '+(2*r)+' ≈ π',lineX,cy+H*0.28);
+
+  // d line
+  ctx.beginPath();ctx.moveTo(cx-drawR,cy-drawR*0.15);ctx.lineTo(cx+drawR,cy-drawR*0.15);
+  ctx.strokeStyle='rgba(8,127,156,.4)';ctx.lineWidth=2;ctx.setLineDash([5,4]);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='rgba(8,127,156,.7)';ctx.font=`${H*0.08}px 'Varela Round'`;ctx.textAlign='center';
+  ctx.fillText('d='+2*r+'cm',cx,cy-drawR*0.15-6);
+}
+
+// ══════════════════════════
+// SATUAN MODUL 2
+// ══════════════════════════
+let currentUnit2='m';
+let treeAnimationFrame=0;
+const countFrames=new WeakMap();
+function countUp(el,target,formatter){
+  const old=countFrames.get(el);if(old)cancelAnimationFrame(old);
+  const startValue=parseFloat((el.textContent||'').replace(/[^\d.-]/g,''))||0;
+  const start=performance.now(),duration=matchMedia('(prefers-reduced-motion: reduce)').matches?0:450;
+  const tick=now=>{
+    const t=Math.min(1,(now-start)/duration),ease=1-Math.pow(1-t,3);
+    el.textContent=formatter(startValue+(target-startValue)*ease);
+    if(t<1)countFrames.set(el,requestAnimationFrame(tick));else countFrames.delete(el);
+  };
+  countFrames.set(el,requestAnimationFrame(tick));
+}
+function updateSatuan2(){
+  const s=document.getElementById('satuan2').value;
+  currentUnit2=s;
+  document.getElementById('satuan-badge-2').textContent=s;
+  document.getElementById('unit-r2').textContent=s;
+  document.getElementById('unit-jarak').textContent=s;
+  document.getElementById('unit-note-2').textContent=`Semua input dan output menggunakan satuan ${s==='m'?'meter (m)':'sentimeter (cm)'}`;
+  ['r2-ru','r2-du','r2-ku'].forEach(id=>document.getElementById(id).textContent=s);
+  document.getElementById('r2-lu').textContent=s+'²';
+}
+
+function hitungTaman(){
+  const r=parseFloat(document.getElementById('inp-r').value)||35;
+  const bPagar=parseFloat(document.getElementById('inp-pagar').value)||75000;
+  const bRumput=parseFloat(document.getElementById('inp-rumput').value)||15000;
+  const jarak=parseFloat(document.getElementById('inp-jarak').value)||5;
+  const pohon=parseInt(document.getElementById('inp-pohon').value)||0;
+  const hLampu=parseFloat(document.getElementById('inp-lampu').value)||350000;
+  const unit=currentUnit2;
+
+  const PI=22/7,d=2*r,K=2*PI*r,L=PI*r*r;
+  const nLampu=Math.ceil(K/jarak);
+  const nPohonButuh=Math.ceil(K/jarak);
+  const selisih=pohon-nPohonButuh;
+  const total=K*bPagar+L*bRumput+nLampu*hLampu;
+
+  countUp(document.getElementById('r2-r'),r,v=>v.toFixed(2));
+  countUp(document.getElementById('r2-d'),d,v=>v.toFixed(2));
+  countUp(document.getElementById('r2-k'),K,v=>v.toFixed(2));
+  countUp(document.getElementById('r2-l'),L,v=>v.toFixed(2));
+  countUp(document.getElementById('r2-lamp'),nLampu,v=>String(Math.round(v)));
+  countUp(document.getElementById('r2-tree'),Math.abs(selisih),v=>String(Math.round(v)));
+  document.getElementById('r2-tree-u').textContent=selisih>=0?'pohon sisa':'pohon kurang';
+  countUp(document.getElementById('r2-total'),Math.round(total),v=>'Rp '+Math.round(v).toLocaleString('id'));
+  document.getElementById('r2-jarak-unit').textContent=jarak+' '+unit;
+
+  const sEl=document.getElementById('status2');
+  if(selisih>0) sEl.innerHTML=`<div class="status-bar sb-ok">✅ Cukup! Sisa ${selisih} pohon (punya ${pohon}, butuh ${nPohonButuh})</div>`;
+  else if(selisih===0) sEl.innerHTML=`<div class="status-bar sb-ok">✅ Pas! ${pohon} pohon = ${nPohonButuh} yang dibutuhkan</div>`;
+  else sEl.innerHTML=`<div class="status-bar sb-warn">⚠️ Kurang ${Math.abs(selisih)} pohon (punya ${pohon}, butuh ${nPohonButuh})</div>`;
+
+  document.getElementById('rincian2').style.display='block';
+  document.getElementById('rincian2').innerHTML=`
+    π = 22/7 ≈ 3,143 &nbsp;|&nbsp; satuan: <strong>${unit}</strong><br>
+    d = 2 × ${r} = <strong>${d.toFixed(2)} ${unit}</strong><br>
+    K = 2 × 22/7 × ${r} = <strong>${K.toFixed(2)} ${unit}</strong><br>
+    L = 22/7 × ${r}² = 22/7 × ${(r*r).toFixed(2)} = <strong>${L.toFixed(2)} ${unit}²</strong><br>
+    Lampu = ⌈${K.toFixed(2)} ÷ ${jarak}⌉ = <strong>${nLampu} unit</strong><br>
+    Biaya pagar = ${K.toFixed(2)} × Rp ${bPagar.toLocaleString('id')} = <strong>Rp ${(K*bPagar).toLocaleString('id')}</strong><br>
+    Biaya rumput = ${L.toFixed(2)} × Rp ${bRumput.toLocaleString('id')} = <strong>Rp ${(L*bRumput).toLocaleString('id')}</strong><br>
+    Biaya lampu = ${nLampu} × Rp ${hLampu.toLocaleString('id')} = <strong>Rp ${(nLampu*hLampu).toLocaleString('id')}</strong><br>
+    <strong>Total = Rp ${Math.round(total).toLocaleString('id')}</strong>`;
+
+  document.getElementById('results2').style.display='block';
+
+  // Canvas2
+  const c2=document.getElementById('canvas2');
+  const size=c2.offsetWidth||300;
+  const dpr=window.devicePixelRatio||1;
+  c2.width=Math.round(size*dpr);c2.height=Math.round(size*dpr);c2.style.height=size+'px';
+  c2.getContext('2d').setTransform(dpr,0,0,dpr,0,0);
+  const ctx=c2.getContext('2d'),cx=size/2,cy=size/2,drawR=size*0.4;
+
+  ctx.clearRect(0,0,size,size);
+  ctx.fillStyle='#f0fcff';ctx.fillRect(0,0,size,size);
+  // Grid
+  ctx.strokeStyle='#eee';ctx.lineWidth=1;
+  for(let x=0;x<size;x+=size/10){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,size);ctx.stroke();}
+  for(let y=0;y<size;y+=size/10){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(size,y);ctx.stroke();}
+  // Axes
+  ctx.strokeStyle='rgba(100,100,180,.25)';ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(cx,8);ctx.lineTo(cx,size-8);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(8,cy);ctx.lineTo(size-8,cy);ctx.stroke();
+  // Axis labels
+  ctx.fillStyle='rgba(100,100,180,.5)';ctx.font=`${size*0.03}px 'Varela Round'`;ctx.textAlign='center';
+  ctx.fillText('Y('+unit+')',cx+18,14);
+  ctx.fillText('X('+unit+')',size-8,cy-8);
+  // Circle
+  ctx.beginPath();ctx.arc(cx,cy,drawR,0,Math.PI*2);
+  ctx.fillStyle='rgba(68,218,255,.18)';ctx.fill();
+  ctx.strokeStyle='#44daff';ctx.lineWidth=3;ctx.stroke();
+  // Radius
+  ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+drawR,cy-drawR*.5);
+  ctx.strokeStyle='#087f9c';ctx.lineWidth=2.5;ctx.stroke();
+  ctx.fillStyle='#087f9c';ctx.font=`bold ${size*0.036}px 'Varela Round'`;ctx.textAlign='center';
+  ctx.fillText(`r=${r}${unit}`,cx+drawR*.58,cy-drawR*.56);
+  // Trees appear clockwise, one marker per animation frame.
+  if(treeAnimationFrame)cancelAnimationFrame(treeAnimationFrame);
+  let treeIndex=0;
+  const plantNext=()=>{
+    if(treeIndex>=nPohonButuh){treeAnimationFrame=0;return;}
+    const i=treeIndex++,ang=(i/nPohonButuh)*Math.PI*2-Math.PI/2;
+    const tx=cx+drawR*Math.cos(ang),ty=cy+drawR*Math.sin(ang);
+    ctx.beginPath();ctx.arc(tx,ty,size*.017,0,Math.PI*2);
+    ctx.fillStyle=i<pohon?'#27ae60':'rgba(231,76,60,.6)';ctx.fill();
+    if(i>=pohon){ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;ctx.stroke();}
+    treeAnimationFrame=requestAnimationFrame(plantNext);
+  };
+  plantNext();
+  /*for(let i=0;i<nPohonButuh;i++){
+    const ang=(i/nPohonButuh)*Math.PI*2-Math.PI/2;
+    const tx=cx+drawR*Math.cos(ang),ty=cy+drawR*Math.sin(ang);
+    ctx.beginPath();ctx.arc(tx,ty,size*.017,0,Math.PI*2);
+    ctx.fillStyle=i<pohon?'#27ae60':'rgba(231,76,60,.6)';ctx.fill();
+    if(i>=pohon){ctx.strokeStyle='#c0392b';ctx.lineWidth=1.5;ctx.stroke();}
+  }*/
+  // Center
+  ctx.beginPath();ctx.arc(cx,cy,6,0,Math.PI*2);ctx.fillStyle='#1a6b3c';ctx.fill();
+  ctx.fillStyle='#1a6b3c';ctx.font=`bold ${size*0.034}px 'Varela Round'`;ctx.textAlign='center';ctx.fillText('O',cx,cy-12);
+  // Legend
+  ctx.font=`bold ${size*0.03}px 'Varela Round'`;ctx.textAlign='left';
+  ctx.fillStyle='#27ae60';ctx.fillText('● Ditanam',10,size-28);
+  ctx.fillStyle='#c0392b';ctx.fillText('○ Kurang',10,size-10);
+}
+
+// ══════════════════════════
+// SATUAN MODUL 3
+// ══════════════════════════
+let currentUnit3='m';
+function updateSatuan3(){
+  const s=document.getElementById('satuan3').value;
+  currentUnit3=s;
+  document.getElementById('satuan-badge-3').textContent=s;
+  document.getElementById('unit-z-r').textContent=s;
+  updateZona();
+}
+
+function getPi(){
+  const v=document.getElementById('z-pi').value;
+  if(v==='22_7') return 22/7;
+  return parseFloat(v);
+}
+function getPiLabel(){
+  return document.getElementById('z-pi').value==='22_7'?'22/7':document.getElementById('z-pi').value;
+}
+
+let zonaAnimationFrame=0,zonaAngles=null;
+function updateZona(){
+  const r=parseFloat(document.getElementById('z-r').value)||35;
+  const pi=getPi(),piL=getPiLabel();
+  const unit=currentUnit3;
+  const a1=parseInt(document.getElementById('z1-s').value);
+  const a2=parseInt(document.getElementById('z2-s').value);
+  const a3=parseInt(document.getElementById('z3-s').value);
+  const total=a1+a2+a3;
+
+  document.getElementById('totalAngle').textContent=total;
+  document.getElementById('totalAngleOk').textContent=total;
+  const warn=document.getElementById('angleWarn'),ok=document.getElementById('angleOk');
+  if(total!==360){ok.classList.remove('angle-pulse');warn.classList.remove('show');void warn.offsetWidth;warn.classList.add('show');ok.style.opacity='.4';}
+  else{warn.classList.remove('show');ok.style.opacity='1';ok.classList.remove('angle-pulse');void ok.offsetWidth;ok.classList.add('angle-pulse');}
+
+  const zones=[
+    {a:a1,k:'1',cols:{bg:'#fef0ee',c:'#c0392b'},name:'🎪 Bermain Anak',biayaId:'z1-biaya'},
+    {a:a2,k:'2',cols:{bg:'#e8f5ee',c:'#1a6b3c'},name:'🏃 Jogging',biayaId:'z2-biaya'},
+    {a:a3,k:'3',cols:{bg:null,c:null},name:'🌸 Taman Bunga',biayaId:'z3-biaya'},
+  ];
+
+  let totalAng=0;
+  const angRows=[];
+  const rincianLines=[];
+
+  zones.forEach(z=>{
+    const busur=(z.a/360)*2*pi*r;
+    const luas=(z.a/360)*pi*r*r;
+    const biaya=parseFloat(document.getElementById(z.biayaId).value)||0;
+    const totalZona=luas*biaya;
+    totalAng+=totalZona;
+
+    document.getElementById(`z${z.k}-ra`).textContent=z.a+'°';
+    document.getElementById(`z${z.k}-rb`).textContent=busur.toFixed(2)+unit;
+    document.getElementById(`z${z.k}-rl`).textContent=luas.toFixed(2)+unit+'²';
+
+    angRows.push({name:z.name,luas:luas.toFixed(2),unit,biaya:biaya.toLocaleString('id'),total:Math.round(totalZona).toLocaleString('id')});
+    rincianLines.push(`${z.name}: PB=(${z.a}/360)×2×${piL}×${r}=<strong>${busur.toFixed(2)} ${unit}</strong> | LJ=(${z.a}/360)×${piL}×${r}²=<strong>${luas.toFixed(2)} ${unit}²</strong>`);
+  });
+
+  document.getElementById('anggaranBody').innerHTML=angRows.map(r=>
+    `<tr><td>${r.name}</td><td>${r.luas} ${r.unit}²</td><td>Rp ${r.biaya}</td><td>Rp ${r.total}</td></tr>`
+  ).join('');
+  countUp(document.getElementById('totalAnggaran'),Math.round(totalAng),v=>'Rp '+Math.round(v).toLocaleString('id'));
+  document.getElementById('zona-rincian').innerHTML=`<div class="rincian">${rincianLines.join('<br>')}</div>`;
+
+  drawZona(r,pi,a1,a2,a3,unit);
+}
+
+function drawZona(r,pi,a1,a2,a3,unit){
+  if(zonaAnimationFrame)cancelAnimationFrame(zonaAnimationFrame);
+  const target=[a1,a2,a3],from=zonaAngles||target.slice(),start=performance.now();
+  const duration=matchMedia('(prefers-reduced-motion: reduce)').matches?0:240;
+  const frame=now=>{
+    const t=Math.min(1,(now-start)/duration),ease=1-(1-t)*(1-t);
+    const angles=target.map((v,i)=>from[i]+(v-from[i])*ease);
+    renderZona(r,pi,...angles,unit);
+    if(t<1)zonaAnimationFrame=requestAnimationFrame(frame);
+    else{zonaAngles=target;zonaAnimationFrame=0;}
+  };
+  zonaAnimationFrame=requestAnimationFrame(frame);
+}
+
+function renderZona(r,pi,a1,a2,a3,unit){
+  const c3=document.getElementById('canvas3');
+  const size=c3.offsetWidth||300;
+  const dpr=window.devicePixelRatio||1;
+  c3.width=Math.round(size*dpr);c3.height=Math.round(size*dpr);c3.style.height=size+'px';
+  c3.getContext('2d').setTransform(dpr,0,0,dpr,0,0);
+  const ctx=c3.getContext('2d'),cx=size/2,cy=size/2,drawR=size*.40;
+  ctx.clearRect(0,0,size,size);
+  ctx.fillStyle='#fdfaff';ctx.fillRect(0,0,size,size);
+  ctx.strokeStyle='#f0f0f0';ctx.lineWidth=1;
+  for(let x=0;x<size;x+=size/8){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,size);ctx.stroke();}
+  for(let y=0;y<size;y+=size/8){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(size,y);ctx.stroke();}
+
+  const angs=[a1,a2,a3],clrs=['#ec4899','#01ccff','#cc5eff'],names=['Bermain','Jogging','Bunga'];
+  const alphas=[0.78,0.72,0.68];
+  let startA=-Math.PI/2;
+
+  angs.forEach((ang,i)=>{
+    if(ang<=0)return;
+    const endA=startA+(ang/360)*Math.PI*2;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,drawR,startA,endA);ctx.closePath();
+    ctx.globalAlpha=alphas[i];ctx.fillStyle=clrs[i];ctx.fill();ctx.globalAlpha=1;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,drawR,startA,endA);ctx.closePath();
+    ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();
+    // Label
+    const midA=startA+(ang/360)*Math.PI;
+    const lr=drawR*.62;
+    ctx.fillStyle=i===0?'#9d174d':i===1?'#073b4c':'#4a126c';ctx.font=`bold ${size*.038}px 'Varela Round'`;ctx.textAlign='center';
+    ctx.fillText(ang+'°',cx+lr*Math.cos(midA),cy+lr*Math.sin(midA));
+    ctx.font=`${size*.03}px 'Varela Round'`;
+    ctx.fillText(names[i],cx+lr*Math.cos(midA),cy+lr*Math.sin(midA)+size*.042);
+    startA=endA;
+  });
+
+  ctx.beginPath();ctx.arc(cx,cy,drawR,0,Math.PI*2);ctx.strokeStyle='#555';ctx.lineWidth=3;ctx.stroke();
+  ctx.beginPath();ctx.arc(cx,cy,10,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle='#333';ctx.lineWidth=2;ctx.stroke();
+  ctx.fillStyle='#333';ctx.font=`bold ${size*.034}px 'Varela Round'`;ctx.textAlign='center';ctx.fillText('O',cx,cy-14);
+  ctx.fillStyle='rgba(60,60,60,.65)';ctx.font=`${size*.028}px 'Varela Round'`;ctx.fillText(`r=${r} ${unit}`,cx,size-8);
+}
+
+// ══════════════════════════
+// MODULE SWITCHER
+// ══════════════════════════
+// Animate the wipe and destination icon; keep a single reusable overlay.
+function playTabTransition(n){
+  let wipe=document.querySelector('.tab-wipe');
+  if(!wipe){wipe=document.createElement('div');wipe.className='tab-wipe';document.body.appendChild(wipe);}
+  wipe.classList.remove('play');wipe.dataset.target=String(n);
+  const icon=document.querySelectorAll('.nav-tab')[n-1]?.querySelector('.ti');
+  if(icon){icon.classList.remove('tab-bounce');void icon.offsetWidth;icon.classList.add('tab-bounce');}
+  void wipe.offsetWidth;wipe.classList.add('play');
+  setTimeout(()=>{wipe.classList.remove('play');if(icon)icon.classList.remove('tab-bounce');},380);
+}
+
+// Serialize rapid tab clicks and refresh hidden canvases only when visible.
+let currentModule=1,transitionBusy=false,queuedModule=null;
+async function showModule(n){
+  if(!Number.isInteger(n)||n<1||n>3)return;
+  if(transitionBusy){queuedModule=n;return;}
+  if(n===currentModule)return;
+  transitionBusy=true;
+  let target=n;
+  try{
+    while(target!==null&&target!==currentModule){
+      const direction=target>currentModule?1:-1;
+      const main=document.querySelector('.main');
+      const oldModule=document.getElementById('module'+currentModule);
+      const newModule=document.getElementById('module'+target);
+      const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+      main.dataset.direction=direction>0?'forward':'backward';
+      queuedModule=null;
+      if(reduced){
+        oldModule.classList.remove('active','exiting','entering');oldModule.style.display='none';
+        newModule.style.display='block';newModule.classList.add('active');
+      }else{
+        oldModule.classList.add('exiting');
+        await new Promise(resolve=>setTimeout(resolve,220));
+        oldModule.classList.remove('active','exiting','entering');oldModule.style.display='none';
+        document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.remove('active'));
+        const newTab=document.querySelectorAll('.nav-tab')[target-1];
+        newTab.dataset.direction=direction>0?'forward':'backward';newTab.classList.add('active');
+        newModule.style.display='block';newModule.classList.remove('exiting','entering');
+        newModule.classList.add('active');void newModule.offsetWidth;newModule.classList.add('entering');
+        playTabTransition(target);
+        await new Promise(resolve=>setTimeout(resolve,300));
+      }
+      document.querySelectorAll('.nav-tab').forEach(tab=>tab.classList.remove('active'));
+      const activeTab=document.querySelectorAll('.nav-tab')[target-1];
+      activeTab.dataset.direction=direction>0?'forward':'backward';activeTab.classList.add('active');
+      newModule.classList.remove('entering','exiting');newModule.classList.add('active');
+      currentModule=target;
+      if(target===1&&newModule.querySelector('#canvas1')&&typeof initC1==='function')initC1();
+      if(target===2){
+        if(typeof updatePiExplorer==='function')updatePiExplorer();
+        const slider=document.getElementById('pi-r-slider');
+        if(newModule.querySelector('#canvas-pi')&&slider&&typeof drawPiCanvas==='function')drawPiCanvas(parseInt(slider.value,10));
+        const results=document.getElementById('results2');
+        if(newModule.querySelector('#canvas2')&&results&&getComputedStyle(results).display!=='none'&&typeof hitungTaman==='function')hitungTaman();
+      }
+      if(target===3&&newModule.querySelector('#canvas3')&&typeof updateZona==='function')updateZona();
+      target=queuedModule;
+    }
+  }finally{
+    document.querySelectorAll('.module').forEach(module=>module.classList.remove('entering','exiting'));
+    transitionBusy=false;queuedModule=null;
+  }
+}
+
+// ══════════════════════════
+// INIT
+// ══════════════════════════
+window.addEventListener('load',()=>{
+  setTimeout(initC1,120);
+  setTimeout(updatePiExplorer,150);
+});
+window.addEventListener('resize',()=>{
+  if(document.getElementById('module1').classList.contains('active')) initC1();
+  if(document.getElementById('module2').classList.contains('active')) updatePiExplorer();
+  if(document.getElementById('module3').classList.contains('active')) updateZona();
+});
+</script>
+</body>
+</html>
